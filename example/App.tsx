@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react'
-import Carousel from '../src/index'
+import ReactFancyCarousel from '../src/index'
 import type { RefType } from '../src/index.d'
 
-const CarouselItem = Carousel.Item
+const Item = ReactFancyCarousel.Item
 
 function App() {
   const carouselRef = useRef<RefType>(null)
@@ -19,18 +19,18 @@ function App() {
   
   return (
     <div className="App">
-      <Carousel
+      <ReactFancyCarousel
         ref={carouselRef}
         style={{ height: '100vh' }}
         autoplay
         onChange={(currentIndex, prevIndex) => console.log(currentIndex, prevIndex)}
       >
-        <CarouselItem style={{ backgroundColor: '#eee' }}>1</CarouselItem>
-        <CarouselItem style={{ backgroundColor: '#bbb' }}>2</CarouselItem>
-        <CarouselItem style={{ backgroundColor: '#999' }}>3</CarouselItem>
-        <CarouselItem style={{ backgroundColor: '#666' }}>4</CarouselItem>
-        <CarouselItem style={{ backgroundColor: '#333' }}>5</CarouselItem>
-      </Carousel>
+        <Item style={{ backgroundColor: '#eee' }}>1</Item>
+        <Item style={{ backgroundColor: '#bbb' }}>2</Item>
+        <Item style={{ backgroundColor: '#999' }}>3</Item>
+        <Item style={{ backgroundColor: '#666' }}>4</Item>
+        <Item style={{ backgroundColor: '#333' }}>5</Item>
+      </ReactFancyCarousel>
     </div>
   )
 }

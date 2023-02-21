@@ -33,8 +33,8 @@ describe('carousel component test', () => {
       autoplay
       duration={2000}
     >
-      <div>1</div>
-      <div>2</div>
+      <Carousel.Item>1</Carousel.Item>
+      <Carousel.Item>2</Carousel.Item>
     </Carousel>);
     const tabpanels = getAllByRole('tabpanel', {
       hidden: true,
@@ -50,8 +50,8 @@ describe('carousel component test', () => {
 
   test('test indicator click', () => {
     const { getByRole, container } = render(<Carousel>
-      <div>1</div>
-      <div>2</div>
+      <Carousel.Item>1</Carousel.Item>
+      <Carousel.Item>2</Carousel.Item>
     </Carousel>);
     const targetTab = getByRole('tab', {
       selected: false,
@@ -71,8 +71,8 @@ describe('carousel component test', () => {
       duration={2000}
       onChange={handleChange}
     >
-      <div>1</div>
-      <div>2</div>
+      <Carousel.Item>1</Carousel.Item>
+      <Carousel.Item>2</Carousel.Item>
     </Carousel>);
     const targetTab = getByRole('tab', {
       selected: false,

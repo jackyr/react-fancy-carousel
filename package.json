@@ -1,19 +1,29 @@
 {
-  "name": "react-carousel",
-  "version": "1.0.0",
+  "name": "react-fancy-carousel",
+  "version": "1.0.0-beta.0",
   "description": "An accessible and customizable react carousel component. Easy to use.",
-  "main": "esm/index.js",
   "type": "module",
+  "module": "./dist/ReactFancyCarousel.js",
+  "main": "./dist/ReactFancyCarousel.umd.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/ReactFancyCarousel.js",
+      "require": "./dist/ReactFancyCarousel.umd.cjs"
+    }
+  },
+  "files": ["dist", "package.json", "LICENSE"],
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
     "site": "tsc && vite build",
     "preview": "vite preview",
+    "build": "tsc && vite build --config vite.config.build.ts",
+    "prepublish": "npm run test && npm run build",
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jackyr/react-carousel.git"
+    "url": "git+https://github.com/jackyr/react-fancy-carousel.git"
   },
   "keywords": [
     "react",
@@ -25,9 +35,9 @@
   "author": "jackyr",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jackyr/react-carousel/issues"
+    "url": "https://github.com/jackyr/react-fancy-carousel/issues"
   },
-  "homepage": "https://github.com/jackyr/react-carousel#readme",
+  "homepage": "https://github.com/jackyr/react-fancy-carousel#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
