@@ -1,4 +1,4 @@
-# react-fancy-carousel
+# react-fancy-carousel [![npm](https://img.shields.io/npm/v/react-fancy-carousel.svg?style=flat-square)](https://www.npmjs.com/package/react-fancy-carousel)
 - Built-in common different carousel effects and indicators.
 - Support extension and customization.
 - Use with react component or hooks(todo..).
@@ -16,7 +16,7 @@ npm install react-fancy-carousel --save
 ### Component
 ```jsx
 import Carousel from 'react-fancy-carousel'
-import 'react-fancy-carousel/style.css'
+import 'react-fancy-carousel/dist/style.css'
 const Item = Carousel.Item
 
 export default () => {

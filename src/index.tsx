@@ -60,9 +60,9 @@ const Carousel = forwardRef<RefType, PropsType>(({
   // make accessibility
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLLIElement>) => {
     e.stopPropagation()
-    if (e.code === 'Enter' || e.code === 'Space') e.currentTarget.click();
-    if (e.code === 'ArrowRight') next();
-    if (e.code === 'ArrowLeft') prev();
+    if (e.key === 'Enter' || e.key === ' ') e.currentTarget.click();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
   }, [next, prev]);
 
   return (

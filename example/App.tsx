@@ -10,8 +10,8 @@ function App() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       e.stopPropagation()
-      if (e.code === 'ArrowLeft') carouselRef.current?.prev()
-      if (e.code === 'ArrowRight') carouselRef.current?.next()
+      if (e.key === 'ArrowLeft') carouselRef.current?.prev()
+      if (e.key === 'ArrowRight') carouselRef.current?.next()
     };
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
