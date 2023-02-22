@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle } from 'react';
-import type { PropsType, RefType } from './index.d';
+import type { PropsType, RefType } from './types.d';
 import { useUid, classNames } from './utils';
 import Item from './Item';
 import styles from './index.module.css';

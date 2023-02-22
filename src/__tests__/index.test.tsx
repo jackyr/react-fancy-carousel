@@ -1,6 +1,6 @@
 import { act, fireEvent, render, renderHook } from '@testing-library/react';
-import Carousel from './index';
-import { classNames, useUid } from './utils';
+import Carousel from '../index';
+import { classNames, useUid } from '../utils';
 
 describe('utils test', () => {
   test('test classNames', () => {

@@ -1,17 +1,23 @@
 {
   "name": "react-fancy-carousel",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-alpha.0",
   "description": "An accessible and customizable react carousel component. Easy to use.",
   "type": "module",
   "module": "./dist/ReactFancyCarousel.js",
   "main": "./dist/ReactFancyCarousel.umd.cjs",
+  "types": "./dist/ReactFancyCarousel.d.ts",
   "exports": {
     ".": {
       "import": "./dist/ReactFancyCarousel.js",
       "require": "./dist/ReactFancyCarousel.umd.cjs"
     }
   },
-  "files": ["dist", "package.json", "LICENSE"],
+  "files": [
+    "dist/",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
@@ -56,6 +62,7 @@
     "react-dom": "^18.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5",
-    "vite": "^4.1.3"
+    "vite": "^4.1.3",
+    "vite-plugin-dts": "^2.0.0-beta.3"
   }
 }

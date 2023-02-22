@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import ReactFancyCarousel from '../src/index'
-import type { RefType } from '../src/index.d'
+import type { RefType } from '../src/types.d'
 
 const Item = ReactFancyCarousel.Item
 

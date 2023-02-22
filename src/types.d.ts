@@ -15,21 +15,21 @@ export interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'className
   autoplay?: boolean;
   
   /**
-   * @description autoplay duration
+   * @description autoplay time duration
    * @unit ms
    * @default 3000
    */
   duration?: number;
   
   /**
-   * @description slide transition speed
+   * @description transition speed
    * @unit ms
    * @default 500
    */
   speed?: number;
 
   /**
-   * @description slide transition timing function
+   * @description transition timing function
    * @enum 'linear' | 'ease' | 'ease-in'.. reference to css property 'transition-timing-function'
    * @default 'ease'
    */
@@ -40,7 +40,7 @@ export interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'className
    * @param currentIndex current active item index
    * @param prevIndex previous active item index
    * @returns void
-   * @default () => void
+   * @default () => {}
    */
   onChange?: (currentIndex: number, prevIndex: number) => void;
 
@@ -49,7 +49,7 @@ export interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'className
    * @param currentIndex current active item index
    * @param itemCount item total count
    * @returns ReactNode
-   * @default () => void
+   * @default () => {}
    */
   indicatorRender?: (currentIndex: number, itemCount: number) => React.ReactNode;
 }
