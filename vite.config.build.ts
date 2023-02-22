@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       name: 'ReactFancyCarousel',
       entry: './src/index.tsx',
-      fileName: 'ReactFancyCarousel'
+      fileName: 'ReactFancyCarousel',
     },
     rollupOptions: {
       external: ['react'],
@@ -27,4 +27,4 @@ export default defineConfig({
       insertTypesEntry: true,
     }),
   ],
-})
+});

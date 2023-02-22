@@ -36,6 +36,13 @@ export interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'className
   timingFunction?: string;
 
   /**
+   * @description use built-in indicator or customized component, wil be hidden when set to null
+   * @enum 'solid' | 'dot' | React.ComponentType | null
+   * @default 'solid'
+   */
+  indicator?: 'solid' | 'dot' | React.ComponentType | null;
+
+  /**
    * @description active item change handler
    * @param currentIndex current active item index
    * @param prevIndex previous active item index
@@ -43,15 +50,6 @@ export interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'className
    * @default () => {}
    */
   onChange?: (currentIndex: number, prevIndex: number) => void;
-
-  /**
-   * @description customize indicator render function
-   * @param currentIndex current active item index
-   * @param itemCount item total count
-   * @returns ReactNode
-   * @default () => {}
-   */
-  indicatorRender?: (currentIndex: number, itemCount: number) => React.ReactNode;
 }
 
 export interface RefType {

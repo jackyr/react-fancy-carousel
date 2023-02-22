@@ -47,9 +47,6 @@ export default () => {
 ``` -->
 
 ## Options
-#### `showIndicator`: boolean
-Show default indicator. default: true
-
 #### `autoplay`: boolean
 Autoplay. default: false
 
@@ -62,11 +59,14 @@ Transition speed. default: 500 (ms)
 #### `timingFunction`: string
 Transition timing function.reference to css property 'transition-timing-function'. default: 'ease'
 
+#### `indicator`: 'solid' | 'dot' | React.ComponentType | null
+use built-in indicator or customized component, wil be hidden when set to null. default: 'solid'
+
 #### `onChange`: (currentIndex: number, prevIndex: number) => void
 Active item change handler. default: () => {}
 
-#### `indicatorRender`: (currentIndex: number, itemCount: number) => React.ReactNode
-Customize indicator render function. default: () => {}
+## Customized indicator component options
+
 
 ## Test
 ```sh

@@ -1,0 +1,23 @@
+.indicator {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 30px;
+}
+
+.indicator_item {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #777;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.indicator_item.active {
+  background-color: #ddd;
+}
