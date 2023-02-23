@@ -92,6 +92,8 @@ const Carousel = forwardRef<RefType, PropsType>(({
         activeIndex={currentIndex}
         itemCount={childrenArr.length}
         duration={autoplay && childrenArr.length > 1 ? duration : 0}
+        next={next}
+        prev={prev}
         goTo={goTo}
       />}
     </div>
@@ -104,4 +106,4 @@ MemoizedCarousel.Item = Item;
 
 export default MemoizedCarousel;
 
-export type { PropsType as IndicatorPropsType } from './indicators/types.d';
+export type { IndicatorPropsType } from './types.d';

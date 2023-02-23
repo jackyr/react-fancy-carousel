@@ -2,15 +2,15 @@ var L = Object.defineProperty, O = Object.defineProperties;
 var U = Object.getOwnPropertyDescriptors;
 var _ = Object.getOwnPropertySymbols;
 var R = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
-var K = (t, n, e) => n in t ? L(t, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[n] = e, N = (t, n) => {
+var K = (t, n, e) => n in t ? L(t, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[n] = e, A = (t, n) => {
   for (var e in n || (n = {}))
     R.call(n, e) && K(t, e, n[e]);
   if (_)
     for (var e of _(n))
       S.call(n, e) && K(t, e, n[e]);
   return t;
-}, A = (t, n) => O(t, U(n));
-var E = (t, n) => {
+}, E = (t, n) => O(t, U(n));
+var k = (t, n) => {
   var e = {};
   for (var r in t)
     R.call(t, r) && n.indexOf(r) < 0 && (e[r] = t[r]);
@@ -19,14 +19,14 @@ var E = (t, n) => {
       n.indexOf(r) < 0 && S.call(t, r) && (e[r] = t[r]);
   return e;
 };
-import s, { useRef as I, useCallback as y, memo as $, forwardRef as q, useState as G, useMemo as M, Children as j, useEffect as F, useImperativeHandle as J, cloneElement as Q } from "react";
+import s, { useRef as D, useCallback as y, memo as $, forwardRef as q, useState as G, useMemo as M, Children as j, useEffect as F, useImperativeHandle as J, cloneElement as Q } from "react";
 const g = (...t) => t.reduce((n, e) => n.concat(
   typeof e == "string" ? e : Object.keys(e || {}).map((r) => (e || {})[r] ? r : "")
-), []).filter(Boolean).join(" "), V = () => I(Math.random().toString(36).substring(2, 7)).current, P = () => y((t) => {
+), []).filter(Boolean).join(" "), V = () => D(Math.random().toString(36).substring(2, 7)).current, P = () => y((t) => {
   t.stopPropagation();
   const n = t.currentTarget.parentNode, e = Array.from(n.childNodes), r = e.findIndex((c) => c === t.currentTarget);
   (t.key === "Enter" || t.key === " ") && t.currentTarget.click(), t.key === "ArrowRight" && (r === e.length - 1 ? e[0].focus() : e[r + 1].focus()), t.key === "ArrowLeft" && (r === 0 ? e[e.length - 1].focus() : e[r - 1].focus());
-}, []), W = "_carousel_xhwdo_1", X = "_container_xhwdo_6", Y = "_carousel_item_xhwdo_14", D = {
+}, []), W = "_carousel_xhwdo_1", X = "_container_xhwdo_6", Y = "_carousel_item_xhwdo_14", T = {
   carousel: W,
   container: X,
   carousel_item: Y
@@ -34,14 +34,14 @@ const g = (...t) => t.reduce((n, e) => n.concat(
   var c = r, {
     className: t,
     children: n
-  } = c, e = E(c, [
+  } = c, e = k(c, [
     "className",
     "children"
   ]);
   return /* @__PURE__ */ s.createElement(
     "section",
-    A(N({}, e), {
-      className: g(t, D.carousel_item)
+    E(A({}, e), {
+      className: g(t, T.carousel_item)
     }),
     n
   );
@@ -88,7 +88,7 @@ const g = (...t) => t.reduce((n, e) => n.concat(
       )
     ))
   );
-}, ce = $(ie), se = "_indicator_1iyzs_1", le = "_indicator_item_1iyzs_11", me = "_active_1iyzs_21", k = {
+}, ce = $(ie), se = "_indicator_1iyzs_1", le = "_indicator_item_1iyzs_11", me = "_active_1iyzs_21", I = {
   indicator: se,
   indicator_item: le,
   active: me
@@ -102,7 +102,7 @@ const g = (...t) => t.reduce((n, e) => n.concat(
   return /* @__PURE__ */ s.createElement(
     "ul",
     {
-      className: k.indicator,
+      className: I.indicator,
       role: "tablist"
     },
     Array.from({ length: n }).map((d, o) => /* @__PURE__ */ s.createElement(
@@ -115,14 +115,14 @@ const g = (...t) => t.reduce((n, e) => n.concat(
         "aria-controls": `carousel-item-${t}-${o}`,
         "aria-selected": e === o,
         tabIndex: e === o ? 0 : -1,
-        className: g(k.indicator_item, { [k.active]: e === o }),
+        className: g(I.indicator_item, { [I.active]: e === o }),
         onClick: () => r(o),
         onKeyDown: c
       }
     ))
   );
 }, ue = $(de), _e = q((ye, H) => {
-  var T = ye, {
+  var x = ye, {
     className: t,
     autoplay: n = !1,
     duration: e = 3e3,
@@ -131,7 +131,7 @@ const g = (...t) => t.reduce((n, e) => n.concat(
     indicator: d = "solid",
     children: o,
     onChange: a
-  } = T, B = E(T, [
+  } = x, B = k(x, [
     "className",
     "autoplay",
     "duration",
@@ -141,45 +141,47 @@ const g = (...t) => t.reduce((n, e) => n.concat(
     "children",
     "onChange"
   ]);
-  const h = V(), [l, p] = G(0), b = I(0), m = M(() => j.toArray(o), [o]);
-  let x = I();
-  const C = M(() => d === "solid" ? ce : d === "dot" ? ue : d, [d]), u = y(() => p((i) => i === m.length - 1 ? 0 : i + 1), [m]), z = y(() => p((i) => i === 0 ? m.length - 1 : i - 1), [m]), v = y((i) => p(i), []);
+  const h = V(), [l, p] = G(0), b = D(0), m = M(() => j.toArray(o), [o]);
+  let C = D();
+  const z = M(() => d === "solid" ? ce : d === "dot" ? ue : d, [d]), u = y(() => p((i) => i === m.length - 1 ? 0 : i + 1), [m]), v = y(() => p((i) => i === 0 ? m.length - 1 : i - 1), [m]), w = y((i) => p(i), []);
   return F(() => {
     a && l !== b.current && a.call(null, l, b.current), b.current = l;
-  }, [l, a]), F(() => (n && m.length > 1 && (x.current = window.setTimeout(u, e)), () => window.clearTimeout(x.current)), [n, l, e, m, u]), J(H, () => ({
+  }, [l, a]), F(() => (n && m.length > 1 && (C.current = window.setTimeout(u, e)), () => window.clearTimeout(C.current)), [n, l, e, m, u]), J(H, () => ({
     next: u,
-    prev: z,
-    goTo: v
-  }), [u, z, v]), /* @__PURE__ */ s.createElement(
+    prev: v,
+    goTo: w
+  }), [u, v, w]), /* @__PURE__ */ s.createElement(
     "div",
-    A(N({}, B), {
-      className: g(t, D.carousel)
+    E(A({}, B), {
+      className: g(t, T.carousel)
     }),
     /* @__PURE__ */ s.createElement(
       "div",
       {
-        className: D.container,
+        className: T.container,
         style: {
           transform: `translate(${-l * 100 + "%"}, 0)`,
           transitionDuration: `${r}ms`,
           transitionTimingFunction: c
         }
       },
-      j.map(o, (i, w) => typeof i == "undefined" ? i : Q(i, {
-        id: `carousel-item-${h}-${w}`,
+      j.map(o, (i, N) => typeof i == "undefined" ? i : Q(i, {
+        id: `carousel-item-${h}-${N}`,
         role: "tabpanel",
-        "aria-labelledby": `carousel-indicator-${h}-${w}`,
-        "aria-hidden": l === w
+        "aria-labelledby": `carousel-indicator-${h}-${N}`,
+        "aria-hidden": l === N
       }))
     ),
-    C && /* @__PURE__ */ s.createElement(
-      C,
+    z && /* @__PURE__ */ s.createElement(
+      z,
       {
         uid: h,
         activeIndex: l,
         itemCount: m.length,
         duration: n && m.length > 1 ? e : 0,
-        goTo: v
+        next: u,
+        prev: v,
+        goTo: w
       }
     )
   );

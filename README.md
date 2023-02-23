@@ -57,7 +57,7 @@ Autoplay time duration. default: 3000 (ms)
 Transition speed. default: 500 (ms)
 
 #### `timingFunction`: string
-Transition timing function.reference to css property 'transition-timing-function'. default: 'ease'
+Transition timing function, reference to css property 'transition-timing-function'. default: 'ease'
 
 #### `indicator`: 'solid' | 'dot' | React.ComponentType | null
 use built-in indicator or customized component, wil be hidden when set to null. default: 'solid'
@@ -65,8 +65,37 @@ use built-in indicator or customized component, wil be hidden when set to null. 
 #### `onChange`: (currentIndex: number, prevIndex: number) => void
 Active item change handler. default: () => {}
 
-## Customized indicator component options
+## Ref instance methods
+#### `next`: () => void
+change to next item. default: () => {}
 
+#### `prev`: () => void
+change to prev item. default: () => {}
+
+#### `goTo`: (index: number) => void
+change to item given by index. default: () => {}
+
+## Customized indicator component options
+#### `uid`: string
+Carousel instance uid, used for ARIA
+
+#### `itemCount`: number
+Carousel item total count
+
+#### `activeIndex`: number
+Current active index
+
+#### `duration`: number
+autoplay time duration, used for animation, if autoplay==false it will be 0
+
+#### `next`: () => void
+change to next item
+
+#### `prev`: () => void
+change to prev item
+
+#### `goTo`: (index: number) => void
+change to item given by index
 
 ## Test
 ```sh

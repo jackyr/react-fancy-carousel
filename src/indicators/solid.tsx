@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import { classNames, useAccessibility } from '../utils';
-import type { PropsType } from './types.d';
+import type { IndicatorPropsType } from '../types.d';
 import styles from './solid.module.css';
 
-const Solid: React.FC<PropsType> = ({
+const Solid: React.FC<IndicatorPropsType> = ({
   uid,
   itemCount,
   activeIndex,

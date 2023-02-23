@@ -65,6 +65,42 @@ export interface RefType {
   prev: () => void;
   /**
    * @description change to item given by index
+   * @param index item index
+   * @returns void
+   */
+  goTo: (index: number) => void;
+}
+
+export interface IndicatorPropsType {
+  /**
+   * @description carousel instance uid, used for ARIA
+   */
+  uid: string;
+  /**
+   * @description carousel item total count
+   */
+  itemCount: number;
+  /**
+   * @description current active index
+   */
+  activeIndex: number;
+  /**
+   * @description autoplay time duration, used for animation, if autoplay==false it will be 0
+   */
+  duration: number;
+  /**
+   * @description change to next item
+   * @returns void
+   */
+  next: () => void;
+  /**
+   * @description change to previous item
+   * @returns void
+   */
+  prev: () => void;
+  /**
+   * @description change to item given by index
+   * @param index item index
    * @returns void
    */
   goTo: (index: number) => void;
