@@ -1,6 +1,6 @@
 {
   "name": "react-fancy-carousel",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "An accessible and customizable react carousel component. Easy to use.",
   "type": "module",
   "types": "./dist/index.d.ts",

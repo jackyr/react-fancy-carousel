@@ -85,8 +85,11 @@ Carousel item total count
 #### `activeIndex`: number
 Current active index
 
+#### `animation`: number
+Show animation
+
 #### `duration`: number
-autoplay time duration, used for animation, if autoplay=false it will be 0
+Animation duration
 
 #### `next`: () => void
 change to next item

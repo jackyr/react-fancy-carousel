@@ -85,7 +85,11 @@ export interface IndicatorPropsType {
    */
   activeIndex: number;
   /**
-   * @description autoplay time duration, used for animation, if autoplay==false it will be 0
+   * @description show animation
+   */
+  animation: boolean;
+  /**
+   * @description animation duration
    */
   duration: number;
   /**

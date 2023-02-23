@@ -1,7 +1,5 @@
 import { default as React_2 } from 'react';
 
-declare const _default: React_2.NamedExoticComponent<React_2.DetailedHTMLProps<React_2.HTMLAttributes<HTMLElement>, HTMLElement>>;
-
 export declare interface IndicatorPropsType {
     /**
      * @description carousel instance uid, used for ARIA
@@ -16,7 +14,11 @@ export declare interface IndicatorPropsType {
      */
     activeIndex: number;
     /**
-     * @description autoplay time duration, used for animation, if autoplay==false it will be 0
+     * @description show animation
+     */
+    animation: boolean;
+    /**
+     * @description animation duration
      */
     duration: number;
     /**
@@ -37,10 +39,12 @@ export declare interface IndicatorPropsType {
     goTo: (index: number) => void;
 }
 
+declare const Item: React_2.FC<JSX.IntrinsicElements['section']>;
+
 declare const MemoizedCarousel: React_2.NamedExoticComponent<Omit<PropsType, "ref"> & React_2.RefAttributes<RefType>> & {
     readonly type: React_2.ForwardRefExoticComponent<Omit<PropsType, "ref"> & React_2.RefAttributes<RefType>>;
 } & {
-    Item: typeof _default;
+    Item: typeof Item;
 };
 export default MemoizedCarousel;
 

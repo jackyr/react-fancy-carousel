@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { classNames } from './utils';
 import styles from './index.module.css';
 
@@ -17,4 +17,4 @@ const Item: React.FC<JSX.IntrinsicElements['section']> = ({
   )
 }
 
-export default memo(Item);
+export default Item;

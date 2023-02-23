@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { classNames, useAccessibility } from '../utils';
 import type { IndicatorPropsType } from '../types.d';
 import styles from './dot.module.css';
@@ -35,4 +35,4 @@ const Dot: React.FC<IndicatorPropsType> = ({
   );
 };
 
-export default memo(Dot);
+export default Dot;

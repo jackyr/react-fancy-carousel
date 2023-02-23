@@ -27,6 +27,8 @@ const Carousel = forwardRef<RefType, PropsType>(({
   const childrenArr = useMemo(() => Children.toArray(children), [children]);
   // autoplay timer handler
   let autoPlayTimer = useRef<number>();
+  // show indicator animation
+  const [indicatorAnim, setIndicatorAnim] = useState(autoplay && childrenArr.length > 1);
   // indicator component
   const Indicator = useMemo(() => {
     if (indicator === 'solid') return SolidIndicator;
@@ -60,6 +62,19 @@ const Carousel = forwardRef<RefType, PropsType>(({
     }
     return () => window.clearTimeout(autoPlayTimer.current);
   }, [autoplay, currentIndex, duration, childrenArr, next]);
+
+  // reset indicator animation when options changes
+  useEffect(() => {
+    if (autoplay && childrenArr.length > 1) {
+      window.requestAnimationFrame(() => setIndicatorAnim(true));
+    }
+    return () => setIndicatorAnim(false);
+  }, [autoplay, duration, childrenArr]);
+
+  // reset current index when children changes
+  useEffect(() => {
+    goTo(0);
+  }, [childrenArr]);
 
   // expose methods to reference
   useImperativeHandle(ref, () => ({
@@ -95,7 +110,8 @@ const Carousel = forwardRef<RefType, PropsType>(({
         uid={uid}
         activeIndex={currentIndex}
         itemCount={childrenArr.length}
-        duration={autoplay && childrenArr.length > 1 ? duration : 0}
+        animation={indicatorAnim}
+        duration={duration}
         next={next}
         prev={prev}
         goTo={goTo}

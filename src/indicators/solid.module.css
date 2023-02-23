@@ -30,6 +30,9 @@
 
 .indicator_item.active .indicator_item_inner {
   width: 100%;
+}
+
+.indicator_item.active .indicator_item_inner.animation {
   animation-name: indicatorAnim;
   animation-timing-function: linear;
 }

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { classNames, useAccessibility } from '../utils';
 import type { IndicatorPropsType } from '../types.d';
 import styles from './solid.module.css';
@@ -7,6 +7,7 @@ const Solid: React.FC<IndicatorPropsType> = ({
   uid,
   itemCount,
   activeIndex,
+  animation,
   duration,
   goTo,
 }) => {
@@ -32,7 +33,7 @@ const Solid: React.FC<IndicatorPropsType> = ({
           onKeyDown={handleKeyDown}
         >
           <div
-            className={styles.indicator_item_inner}
+            className={classNames(styles.indicator_item_inner, {[styles.animation]: animation})}
             style={{ animationDuration: `${duration}ms` }}
           ></div>
         </li>
@@ -41,4 +42,4 @@ const Solid: React.FC<IndicatorPropsType> = ({
   );
 };
 
-export default memo(Solid);
+export default Solid;
