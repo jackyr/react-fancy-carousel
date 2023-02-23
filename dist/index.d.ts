@@ -86,19 +86,19 @@ declare interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'classNam
      * @enum 'solid' | 'dot' | React.ComponentType | null
      * @default 'solid'
      */
-    indicator?: 'solid' | 'dot' | React.ComponentType | null;
+    indicator?: 'solid' | 'dot' | React.ComponentType<IndicatorPropsType> | null;
 
     /**
      * @description active item change handler
-     * @param currentIndex current active item index
+     * @param currIndex current active item index
      * @param prevIndex previous active item index
      * @returns void
      * @default () => {}
      */
-    onChange?: (currentIndex: number, prevIndex: number) => void;
+    onChange?: (currIndex: number, prevIndex: number) => void;
 }
 
-declare interface RefType {
+export declare interface RefType {
     /**
      * @description change to next item
      * @returns void
@@ -116,5 +116,7 @@ declare interface RefType {
      */
     goTo: (index: number) => void;
 }
+
+export declare const useAccessibility: () => (e: React.KeyboardEvent<HTMLElement>) => void;
 
 export { }

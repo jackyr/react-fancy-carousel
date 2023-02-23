@@ -40,16 +40,16 @@ export interface PropsType extends Omit<JSX.IntrinsicElements['div'], 'className
    * @enum 'solid' | 'dot' | React.ComponentType | null
    * @default 'solid'
    */
-  indicator?: 'solid' | 'dot' | React.ComponentType | null;
+  indicator?: 'solid' | 'dot' | React.ComponentType<IndicatorPropsType> | null;
 
   /**
    * @description active item change handler
-   * @param currentIndex current active item index
+   * @param currIndex current active item index
    * @param prevIndex previous active item index
    * @returns void
    * @default () => {}
    */
-  onChange?: (currentIndex: number, prevIndex: number) => void;
+  onChange?: (currIndex: number, prevIndex: number) => void;
 }
 
 export interface RefType {

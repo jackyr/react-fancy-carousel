@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle } from 'react';
 import type { PropsType, RefType } from './types.d';
 import { useUid, classNames } from './utils';
 import Item from './Item';
@@ -39,7 +39,11 @@ const Carousel = forwardRef<RefType, PropsType>(({
     setCurrentIndex(index => index === childrenArr.length - 1 ? 0 : index + 1), [childrenArr]);
   const prev = useCallback(() =>
     setCurrentIndex(index => index === 0 ? childrenArr.length - 1 : index - 1), [childrenArr]);
-  const goTo = useCallback((index: number) => setCurrentIndex(index), []);
+  const goTo = useCallback((index: number) =>
+    setCurrentIndex(() => {
+      if (index < 0) return -index > childrenArr.length ? 0 : childrenArr.length + index;
+      else return index > childrenArr.length - 1 ? childrenArr.length - 1 : index;
+    }), [childrenArr]);
 
   // trigger onChange callback when currentIndex change
   useEffect(() => {
@@ -101,9 +105,8 @@ const Carousel = forwardRef<RefType, PropsType>(({
 });
 
 const MemoizedCarousel = memo(Carousel) as React.MemoExoticComponent<typeof Carousel> & { Item: typeof Item };
-
 MemoizedCarousel.Item = Item;
 
 export default MemoizedCarousel;
-
-export type { IndicatorPropsType } from './types.d';
+export { useAccessibility } from './utils';
+export type { RefType, IndicatorPropsType } from './types.d';

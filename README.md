@@ -62,10 +62,10 @@ Transition timing function, reference to css property 'transition-timing-functio
 #### `indicator`: 'solid' | 'dot' | React.ComponentType | null
 use built-in indicator or customized component, wil be hidden when set to null. default: 'solid'
 
-#### `onChange`: (currentIndex: number, prevIndex: number) => void
+#### `onChange`: (currIndex: number, prevIndex: number) => void
 Active item change handler. default: () => {}
 
-## Ref instance methods
+## Ref instance methods (interface RefType)
 #### `next`: () => void
 change to next item. default: () => {}
 
@@ -75,7 +75,7 @@ change to prev item. default: () => {}
 #### `goTo`: (index: number) => void
 change to item given by index. default: () => {}
 
-## Customized indicator component options
+## Customized indicator component options (interface IndicatorPropsType)
 #### `uid`: string
 Carousel instance uid, used for ARIA
 
@@ -86,7 +86,7 @@ Carousel item total count
 Current active index
 
 #### `duration`: number
-autoplay time duration, used for animation, if autoplay==false it will be 0
+autoplay time duration, used for animation, if autoplay=false it will be 0
 
 #### `next`: () => void
 change to next item

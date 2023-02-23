@@ -1,0 +1,49 @@
+.indicator {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 30px;
+}
+
+.indicator_item {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indicator_item.active {
+  color: #000;
+  background-color: #ddd;
+}
+
+.nextBtn, .prevBtn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  bottom: 50%;
+  width: 20px;
+  height: 50px;
+  border-radius: 2px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  transform: translate(0, -50%);
+  cursor: pointer;
+}
+
+.prevBtn {
+  left: auto;
+  right: 20px;
+}

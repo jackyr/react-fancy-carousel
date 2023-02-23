@@ -1,36 +1,26 @@
-import React, { useRef, useEffect } from 'react'
-import ReactFancyCarousel from '../src/index'
-import type { RefType } from '../src/types.d'
-
-const Item = ReactFancyCarousel.Item
+import { useState } from 'react'
+import BasicDemo from './demo/Basic'
+import AdvancedDemo from './demo/Advanced'
+import CustomDemo from './demo/Custom'
 
 function App() {
-  const carouselRef = useRef<RefType>(null)
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      e.stopPropagation()
-      if (e.key === 'ArrowLeft') carouselRef.current?.prev()
-      if (e.key === 'ArrowRight') carouselRef.current?.next()
-    };
-    document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
-  }, [])
+  const [activeIndex, setActiveIndex] = useState(0)
   
   return (
     <div className="App">
-      <ReactFancyCarousel
-        ref={carouselRef}
-        style={{ height: '100vh' }}
-        autoplay
-        onChange={(currentIndex, prevIndex) => console.log(currentIndex, prevIndex)}
-      >
-        <Item style={{ backgroundColor: '#eee' }}>1</Item>
-        <Item style={{ backgroundColor: '#bbb' }}>2</Item>
-        <Item style={{ backgroundColor: '#999' }}>3</Item>
-        <Item style={{ backgroundColor: '#666' }}>4</Item>
-        <Item style={{ backgroundColor: '#333' }}>5</Item>
-      </ReactFancyCarousel>
+      <h1 style={{ display: 'flex', gap: 20, margin: 0 }}>
+        {['Demo1', 'Demo2', 'Demo3'].map((v, i) => (
+          <a
+            key={i}
+            style={activeIndex === i ? { color: '#f00' } : {}}
+            onClick={() => setActiveIndex(i)}
+            href="#"
+          >{v}</a>
+        ))}
+      </h1>
+      {[<BasicDemo />, <AdvancedDemo />, <CustomDemo />].find((v, i) => (
+        activeIndex === i && v
+      ))}
     </div>
   )
 }

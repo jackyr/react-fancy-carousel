@@ -15,8 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "paths": {
+      "react-fancy-carousel": ["./src/index.tsx"],
+    },
     "types": ["vite/client", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src"],
+  "include": ["src", "example"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
