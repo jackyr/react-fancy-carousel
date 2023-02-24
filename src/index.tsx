@@ -23,12 +23,12 @@ const Carousel = forwardRef<RefType, PropsType>(({
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // previous visible item index
   const prevIndex = useRef<number>(0);
-  // children array
-  const childrenArr = useMemo(() => Children.toArray(children), [children]);
+  // childrenCount
+  const itemCount = useMemo(() => Children.count(children), [children])
   // autoplay timer handler
-  let autoPlayTimer = useRef<number>();
+  const autoPlayTimer = useRef<number>();
   // show indicator animation
-  const [indicatorAnim, setIndicatorAnim] = useState(autoplay && childrenArr.length > 1);
+  const [indicatorAnim, setIndicatorAnim] = useState(autoplay && itemCount > 1);
   // indicator component
   const Indicator = useMemo(() => {
     if (indicator === 'solid') return SolidIndicator;
@@ -38,14 +38,14 @@ const Carousel = forwardRef<RefType, PropsType>(({
 
   // change operation method
   const next = useCallback(() =>
-    setCurrentIndex(index => index === childrenArr.length - 1 ? 0 : index + 1), [childrenArr]);
+    setCurrentIndex(index => index === itemCount - 1 ? 0 : index + 1), [itemCount]);
   const prev = useCallback(() =>
-    setCurrentIndex(index => index === 0 ? childrenArr.length - 1 : index - 1), [childrenArr]);
+    setCurrentIndex(index => index === 0 ? itemCount - 1 : index - 1), [itemCount]);
   const goTo = useCallback((index: number) =>
     setCurrentIndex(() => {
-      if (index < 0) return -index > childrenArr.length ? 0 : childrenArr.length + index;
-      else return index > childrenArr.length - 1 ? childrenArr.length - 1 : index;
-    }), [childrenArr]);
+      if (index < 0) return -index > itemCount ? 0 : itemCount + index;
+      else return index > itemCount - 1 ? itemCount - 1 : index;
+    }), [itemCount]);
 
   // trigger onChange callback when currentIndex change
   useEffect(() => {
@@ -57,24 +57,24 @@ const Carousel = forwardRef<RefType, PropsType>(({
 
   // trigger autoplay
   useEffect(() => {
-    if (autoplay && childrenArr.length > 1) {
+    if (autoplay && itemCount > 1) {
       autoPlayTimer.current = window.setTimeout(next, duration);
     }
     return () => window.clearTimeout(autoPlayTimer.current);
-  }, [autoplay, currentIndex, duration, childrenArr, next]);
+  }, [autoplay, currentIndex, duration, itemCount, next]);
 
   // reset indicator animation when options changes
   useEffect(() => {
-    if (autoplay && childrenArr.length > 1) {
+    if (autoplay && itemCount > 1) {
       window.requestAnimationFrame(() => setIndicatorAnim(true));
     }
     return () => setIndicatorAnim(false);
-  }, [autoplay, duration, childrenArr]);
+  }, [autoplay, duration, itemCount]);
 
   // reset current index when children changes
   useEffect(() => {
     goTo(0);
-  }, [childrenArr]);
+  }, [itemCount, goTo]);
 
   // expose methods to reference
   useImperativeHandle(ref, () => ({
@@ -109,7 +109,7 @@ const Carousel = forwardRef<RefType, PropsType>(({
       {Indicator && <Indicator
         uid={uid}
         activeIndex={currentIndex}
-        itemCount={childrenArr.length}
+        itemCount={itemCount}
         animation={indicatorAnim}
         duration={duration}
         next={next}
