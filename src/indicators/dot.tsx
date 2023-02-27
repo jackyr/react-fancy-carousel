@@ -26,7 +26,8 @@ const Dot: React.FC<IndicatorPropsType> = ({
           aria-controls={`carousel-item-${uid}-${i}`}
           aria-selected={activeIndex === i}
           tabIndex={activeIndex === i ? 0 : -1}
-          className={classNames(styles.indicator_item, {[styles.active]: activeIndex === i})}
+          data-active={activeIndex === i}
+          className={styles.indicator_item}
           onClick={() => goTo(i)}
           onKeyDown={handleKeyDown}
         ></li>

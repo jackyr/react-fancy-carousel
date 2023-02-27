@@ -28,11 +28,11 @@
   will-change: indicatorAnim;
 }
 
-.indicator_item.active .indicator_item_inner {
+.indicator_item[data-active=true] .indicator_item_inner {
   width: 100%;
 }
 
-.indicator_item.active .indicator_item_inner.animation {
+.indicator_item[data-active=true] .animation {
   animation-name: indicatorAnim;
   animation-timing-function: linear;
 }

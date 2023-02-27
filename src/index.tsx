@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle } from 'react';
-import type { PropsType, RefType } from './types.d';
+import type { CarouselPropsType, RefType } from './types.d';
 import { useUid, classNames } from './utils';
 import Item from './Item';
 import SolidIndicator from './indicators/solid';
 import DotIndicator from './indicators/dot';
 import styles from './index.module.css';
 
-const Carousel = forwardRef<RefType, PropsType>(({
+const Carousel = forwardRef<RefType, CarouselPropsType>(({
   className,
   autoplay = false,
+  effect = 'slide',
   duration = 3000,
   speed = 500,
   timingFunction = 'ease',
@@ -89,20 +90,21 @@ const Carousel = forwardRef<RefType, PropsType>(({
       className={classNames(className, styles.carousel)}
     >
       <div
-        className={styles.container}
-        style={{
+        className={classNames(styles.container, {[styles.slide]: effect === 'slide'})}
+        style={effect === 'slide' ? {
           transform: `translate(${-currentIndex * 100 + '%'}, 0)`,
           transitionDuration: `${speed}ms`,
           transitionTimingFunction: timingFunction,
-        }}
+        } : undefined}
       >
         {Children.map(children, (child, i) => {
           if (typeof child === 'undefined') return child;
           return cloneElement(child, {
-            id: `carousel-item-${uid}-${i}`,
-            role: 'tabpanel',
-            'aria-labelledby': `carousel-indicator-${uid}-${i}`,
-            'aria-hidden': currentIndex === i,
+            uid,
+            index: i,
+            active: currentIndex === i,
+            effect: effect === 'fade' ? 'fade' : 'none',
+            speed,
           });
         })}
       </div>
@@ -125,4 +127,4 @@ MemoizedCarousel.Item = Item;
 
 export default MemoizedCarousel;
 export { useAccessibility } from './utils';
-export type { RefType, IndicatorPropsType } from './types.d';
+export type { RefType, ItemPropsType, IndicatorPropsType } from './types.d';

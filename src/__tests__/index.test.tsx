@@ -39,13 +39,13 @@ describe('carousel component test', () => {
     const tabpanels = getAllByRole('tabpanel', {
       hidden: true,
     });
-    expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
-    expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
+    expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
+    expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
     await act(() => {
       return new Promise(resolve => setTimeout(resolve, 2000));
     });
-    expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
-    expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
+    expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
+    expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
   });
 
   test('test indicator click', () => {
@@ -58,10 +58,10 @@ describe('carousel component test', () => {
     });
     const targetTabpanel = container.querySelector(`#${targetTab.getAttribute('aria-controls')}`);
     expect(targetTab).toHaveAttribute('aria-selected', 'false');
-    expect(targetTabpanel).toHaveAttribute('aria-hidden', 'false');
+    expect(targetTabpanel).toHaveAttribute('aria-hidden', 'true');
     fireEvent.click(targetTab);
     expect(targetTab).toHaveAttribute('aria-selected', 'true');
-    expect(targetTabpanel).toHaveAttribute('aria-hidden', 'true');
+    expect(targetTabpanel).toHaveAttribute('aria-hidden', 'false');
   });
 
   test('test callback function', async () => {

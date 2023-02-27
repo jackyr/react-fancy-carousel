@@ -21,15 +21,16 @@ function Advanced() {
     <ReactFancyCarousel
       ref={carouselRef}
       style={{ height: '500px' }}
+      effect="fade"
       indicator="dot"
-      speed={300}
+      speed={800}
       timingFunction="linear"
     >
-      <Item style={{ backgroundColor: '#eee' }}>1</Item>
-      <Item style={{ backgroundColor: '#bbb' }}>2</Item>
+      <Item style={{ backgroundColor: '#999' }}>1</Item>
+      <Item style={{ backgroundColor: '#999' }}>2</Item>
       <Item style={{ backgroundColor: '#999' }}>3</Item>
-      <Item style={{ backgroundColor: '#666' }}>4</Item>
-      <Item style={{ backgroundColor: '#333' }}>5</Item>
+      <Item style={{ backgroundColor: '#999' }}>4</Item>
+      <Item style={{ backgroundColor: '#999' }}>5</Item>
     </ReactFancyCarousel>
   </>)
 }

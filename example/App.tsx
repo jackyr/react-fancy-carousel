@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <h1 style={{ display: 'flex', gap: 20, margin: 0 }}>
-        {['Demo1', 'Demo2', 'Demo3', 'Demo4'].map((v, i) => (
+        {['Basic', 'Advance', 'Dynamic', 'Custom'].map((v, i) => (
           <button
             key={i}
             style={activeIndex === i ? { color: '#f00' } : {}}

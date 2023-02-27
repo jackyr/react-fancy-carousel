@@ -50,6 +50,9 @@ export default () => {
 #### `autoplay`: boolean
 Autoplay. default: false
 
+#### `effect`: 'slide' | 'fade'
+Change animation effect. default: 'slide'
+
 #### `duration`: number
 Autoplay time duration. default: 3000 (ms)
 
@@ -60,20 +63,20 @@ Transition speed. default: 500 (ms)
 Transition timing function, reference to css property 'transition-timing-function'. default: 'ease'
 
 #### `indicator`: 'solid' | 'dot' | React.ComponentType | null
-use built-in indicator or customized component, wil be hidden when set to null. default: 'solid'
+Use built-in indicator or customized component, wil be hidden when set to null. default: 'solid'
 
 #### `onChange`: (currIndex: number, prevIndex: number) => void
 Active item change handler. default: () => {}
 
 ## Ref instance methods (interface RefType)
 #### `next`: () => void
-change to next item. default: () => {}
+Change to next item. default: () => {}
 
 #### `prev`: () => void
-change to prev item. default: () => {}
+Change to prev item. default: () => {}
 
 #### `goTo`: (index: number) => void
-change to item given by index. default: () => {}
+Change to item given by index. default: () => {}
 
 ## Customized indicator component options (interface IndicatorPropsType)
 #### `uid`: string
@@ -92,13 +95,13 @@ Show animation
 Animation duration
 
 #### `next`: () => void
-change to next item
+Change to next item
 
 #### `prev`: () => void
-change to prev item
+Change to prev item
 
 #### `goTo`: (index: number) => void
-change to item given by index
+Change to item given by index
 
 ## Test
 ```sh

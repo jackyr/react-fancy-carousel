@@ -18,6 +18,6 @@
   cursor: pointer;
 }
 
-.indicator_item.active {
+.indicator_item[data-active=true] {
   background-color: #ddd;
 }

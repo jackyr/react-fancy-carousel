@@ -1,73 +1,92 @@
-var O = Object.defineProperty, U = Object.defineProperties;
-var G = Object.getOwnPropertyDescriptors;
-var $ = Object.getOwnPropertySymbols;
-var S = Object.prototype.hasOwnProperty, j = Object.prototype.propertyIsEnumerable;
-var M = (t, n, e) => n in t ? O(t, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[n] = e, v = (t, n) => {
+var x = Object.defineProperty, G = Object.defineProperties;
+var J = Object.getOwnPropertyDescriptors;
+var y = Object.getOwnPropertySymbols;
+var M = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
+var F = (t, n, e) => n in t ? x(t, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[n] = e, E = (t, n) => {
   for (var e in n || (n = {}))
-    S.call(n, e) && M(t, e, n[e]);
-  if ($)
-    for (var e of $(n))
-      j.call(n, e) && M(t, e, n[e]);
+    M.call(n, e) && F(t, e, n[e]);
+  if (y)
+    for (var e of y(n))
+      S.call(n, e) && F(t, e, n[e]);
   return t;
-}, h = (t, n) => U(t, G(n));
+}, D = (t, n) => G(t, J(n));
 var I = (t, n) => {
   var e = {};
-  for (var r in t)
-    S.call(t, r) && n.indexOf(r) < 0 && (e[r] = t[r]);
-  if (t != null && $)
-    for (var r of $(t))
-      n.indexOf(r) < 0 && j.call(t, r) && (e[r] = t[r]);
+  for (var a in t)
+    M.call(t, a) && n.indexOf(a) < 0 && (e[a] = t[a]);
+  if (t != null && y)
+    for (var a of y(t))
+      n.indexOf(a) < 0 && S.call(t, a) && (e[a] = t[a]);
   return e;
 };
-import l, { useRef as C, useCallback as b, forwardRef as J, useState as P, useMemo as q, Children as D, useEffect as g, useImperativeHandle as Q, cloneElement as V, memo as W } from "react";
-const y = (...t) => t.reduce((n, e) => n.concat(
-  typeof e == "string" ? e : Object.keys(e || {}).map((r) => (e || {})[r] ? r : "")
-), []).filter(Boolean).join(" "), X = () => C(Math.random().toString(36).substring(2, 7)).current, B = () => b((t) => {
+import l, { useRef as h, useCallback as p, forwardRef as Q, useState as O, useMemo as P, Children as B, useEffect as b, useImperativeHandle as V, cloneElement as W, memo as X } from "react";
+const j = (...t) => t.reduce((n, e) => n.concat(
+  typeof e == "string" ? e : Object.keys(e || {}).map((a) => (e || {})[a] ? a : "")
+), []).filter(Boolean).join(" "), Y = () => h(Math.random().toString(36).substring(2, 7)).current, L = () => p((t) => {
   t.stopPropagation();
-  const n = t.currentTarget.parentNode, e = Array.from(n.childNodes), r = e.findIndex((c) => c === t.currentTarget);
-  (t.key === "Enter" || t.key === " ") && (t.preventDefault(), t.currentTarget.click()), t.key === "ArrowRight" && (r === e.length - 1 ? e[0].focus() : e[r + 1].focus()), t.key === "ArrowLeft" && (r === 0 ? e[e.length - 1].focus() : e[r - 1].focus());
-}, []), Y = "_carousel_xhwdo_1", Z = "_container_xhwdo_6", ee = "_carousel_item_xhwdo_14", z = {
-  carousel: Y,
-  container: Z,
-  carousel_item: ee
-}, te = (r) => {
-  var c = r, {
-    className: t,
-    children: n
-  } = c, e = I(c, [
+  const n = t.currentTarget.parentNode, e = Array.from(n.childNodes), a = e.findIndex((c) => c === t.currentTarget);
+  (t.key === "Enter" || t.key === " ") && (t.preventDefault(), t.currentTarget.click()), t.key === "ArrowRight" && (a === e.length - 1 ? e[0].focus() : e[a + 1].focus()), t.key === "ArrowLeft" && (a === 0 ? e[e.length - 1].focus() : e[a - 1].focus());
+}, []), Z = "_carousel_1jakq_1", ee = "_container_1jakq_6", te = "_slide_1jakq_12", ne = "_carousel_item_1jakq_17", ae = "_fade_1jakq_22", k = {
+  carousel: Z,
+  container: ee,
+  slide: te,
+  carousel_item: ne,
+  fade: ae
+}, re = (q) => {
+  var $ = q, {
+    style: t,
+    className: n,
+    uid: e,
+    index: a,
+    active: c,
+    effect: u,
+    speed: r,
+    children: d
+  } = $, s = I($, [
+    "style",
     "className",
+    "uid",
+    "index",
+    "active",
+    "effect",
+    "speed",
     "children"
   ]);
   return /* @__PURE__ */ l.createElement(
     "section",
-    h(v({}, e), {
-      className: y(t, z.carousel_item)
+    D(E({}, s), {
+      style: Object.assign({ transitionDuration: `${r}ms` }, t),
+      className: j(n, k.carousel_item, { [k.fade]: u === "fade" }),
+      id: `carousel-item-${e}-${a}`,
+      role: "tabpanel",
+      "data-active": c,
+      "aria-labelledby": `carousel-indicator-${e}-${a}`,
+      "aria-hidden": !c
     }),
-    n
+    d
   );
-}, ne = "_indicator_uwymd_1", re = "_indicator_item_uwymd_11", oe = "_indicator_item_inner_uwymd_21", ae = "_active_uwymd_31", ie = "_animation_uwymd_35", ce = "_indicatorAnim_uwymd_1", f = {
-  indicator: ne,
-  indicator_item: re,
-  indicator_item_inner: oe,
-  active: ae,
-  animation: ie,
-  indicatorAnim: ce
-}, se = ({
+}, oe = "_indicator_akzuj_1", ie = "_indicator_item_akzuj_11", se = "_indicator_item_inner_akzuj_21", ce = "_animation_akzuj_35", le = "_indicatorAnim_akzuj_1", g = {
+  indicator: oe,
+  indicator_item: ie,
+  indicator_item_inner: se,
+  animation: ce,
+  indicatorAnim: le
+}, me = ({
   uid: t,
   itemCount: n,
   activeIndex: e,
-  animation: r,
+  animation: a,
   duration: c,
   goTo: u
 }) => {
-  const a = B();
+  const r = L();
   return /* @__PURE__ */ l.createElement(
     "ul",
     {
-      className: f.indicator,
+      className: g.indicator,
       role: "tablist"
     },
-    Array.from({ length: n }).map((w, s) => /* @__PURE__ */ l.createElement(
+    Array.from({ length: n }).map((d, s) => /* @__PURE__ */ l.createElement(
       "li",
       {
         key: s,
@@ -77,65 +96,68 @@ const y = (...t) => t.reduce((n, e) => n.concat(
         "aria-controls": `carousel-item-${t}-${s}`,
         "aria-selected": e === s,
         tabIndex: e === s ? 0 : -1,
-        className: y(f.indicator_item, { [f.active]: e === s }),
+        "data-active": e === s,
+        className: g.indicator_item,
         onClick: () => u(s),
-        onKeyDown: a
+        onKeyDown: r
       },
       /* @__PURE__ */ l.createElement(
         "div",
         {
-          className: y(f.indicator_item_inner, { [f.animation]: r }),
+          className: j(g.indicator_item_inner, { [g.animation]: a }),
           style: { animationDuration: `${c}ms` }
         }
       )
     ))
   );
-}, le = "_indicator_1iyzs_1", me = "_indicator_item_1iyzs_11", ue = "_active_1iyzs_21", T = {
-  indicator: le,
-  indicator_item: me,
-  active: ue
-}, de = ({
+}, ue = "_indicator_qkbio_1", de = "_indicator_item_qkbio_11", H = {
+  indicator: ue,
+  indicator_item: de
+}, _e = ({
   uid: t,
   itemCount: n,
   activeIndex: e,
-  goTo: r
+  goTo: a
 }) => {
-  const c = B();
+  const c = L();
   return /* @__PURE__ */ l.createElement(
     "ul",
     {
-      className: T.indicator,
+      className: H.indicator,
       role: "tablist"
     },
-    Array.from({ length: n }).map((u, a) => /* @__PURE__ */ l.createElement(
+    Array.from({ length: n }).map((u, r) => /* @__PURE__ */ l.createElement(
       "li",
       {
-        key: a,
-        id: `carousel-indicator-${t}-${a}`,
+        key: r,
+        id: `carousel-indicator-${t}-${r}`,
         role: "tab",
-        "aria-label": `change to page ${a + 1}`,
-        "aria-controls": `carousel-item-${t}-${a}`,
-        "aria-selected": e === a,
-        tabIndex: e === a ? 0 : -1,
-        className: y(T.indicator_item, { [T.active]: e === a }),
-        onClick: () => r(a),
+        "aria-label": `change to page ${r + 1}`,
+        "aria-controls": `carousel-item-${t}-${r}`,
+        "aria-selected": e === r,
+        tabIndex: e === r ? 0 : -1,
+        "data-active": e === r,
+        className: H.indicator_item,
+        onClick: () => a(r),
         onKeyDown: c
       }
     ))
   );
-}, _e = J((ye, H) => {
-  var K = ye, {
+}, fe = Q(($e, $) => {
+  var T = $e, {
     className: t,
     autoplay: n = !1,
-    duration: e = 3e3,
-    speed: r = 500,
-    timingFunction: c = "ease",
-    indicator: u = "solid",
-    children: a,
-    onChange: w
-  } = K, s = I(K, [
+    effect: e = "slide",
+    duration: a = 3e3,
+    speed: c = 500,
+    timingFunction: u = "ease",
+    indicator: r = "solid",
+    children: d,
+    onChange: s
+  } = T, q = I(T, [
     "className",
     "autoplay",
+    "effect",
     "duration",
     "speed",
     "timingFunction",
@@ -143,54 +165,55 @@ const y = (...t) => t.reduce((n, e) => n.concat(
     "children",
     "onChange"
   ]);
-  const p = X(), [m, A] = P(0), N = C(0), o = q(() => (console.log(D.count(a)), D.count(a)), [a]), R = C(), [L, x] = P(n && o > 1), F = q(() => u === "solid" ? se : u === "dot" ? de : u, [u]), d = b(() => A((i) => i === o - 1 ? 0 : i + 1), [o]), E = b(() => A((i) => i === 0 ? o - 1 : i - 1), [o]), _ = b((i) => A(() => i < 0 ? -i > o ? 0 : o + i : i > o - 1 ? o - 1 : i), [o]);
-  return g(() => {
-    w && m !== N.current && w.call(null, m, N.current), N.current = m;
-  }, [m, w]), g(() => (n && o > 1 && (R.current = window.setTimeout(d, e)), () => window.clearTimeout(R.current)), [n, m, e, o, d]), g(() => (n && o > 1 && window.requestAnimationFrame(() => x(!0)), () => x(!1)), [n, e, o]), g(() => {
-    _(0);
-  }, [o, _]), Q(H, () => ({
-    next: d,
-    prev: E,
-    goTo: _
-  }), [d, E, _]), /* @__PURE__ */ l.createElement(
+  const v = Y(), [m, w] = O(0), A = h(0), o = P(() => B.count(d), [d]), z = h(), [U, C] = O(n && o > 1), K = P(() => r === "solid" ? me : r === "dot" ? _e : r, [r]), _ = p(() => w((i) => i === o - 1 ? 0 : i + 1), [o]), N = p(() => w((i) => i === 0 ? o - 1 : i - 1), [o]), f = p((i) => w(() => i < 0 ? -i > o ? 0 : o + i : i > o - 1 ? o - 1 : i), [o]);
+  return b(() => {
+    s && m !== A.current && s.call(null, m, A.current), A.current = m;
+  }, [m, s]), b(() => (n && o > 1 && (z.current = window.setTimeout(_, a)), () => window.clearTimeout(z.current)), [n, m, a, o, _]), b(() => (n && o > 1 && window.requestAnimationFrame(() => C(!0)), () => C(!1)), [n, a, o]), b(() => {
+    f(0);
+  }, [o, f]), V($, () => ({
+    next: _,
+    prev: N,
+    goTo: f
+  }), [_, N, f]), /* @__PURE__ */ l.createElement(
     "div",
-    h(v({}, s), {
-      className: y(t, z.carousel)
+    D(E({}, q), {
+      className: j(t, k.carousel)
     }),
     /* @__PURE__ */ l.createElement(
       "div",
       {
-        className: z.container,
-        style: {
+        className: j(k.container, { [k.slide]: e === "slide" }),
+        style: e === "slide" ? {
           transform: `translate(${-m * 100 + "%"}, 0)`,
-          transitionDuration: `${r}ms`,
-          transitionTimingFunction: c
-        }
+          transitionDuration: `${c}ms`,
+          transitionTimingFunction: u
+        } : void 0
       },
-      D.map(a, (i, k) => typeof i == "undefined" ? i : V(i, {
-        id: `carousel-item-${p}-${k}`,
-        role: "tabpanel",
-        "aria-labelledby": `carousel-indicator-${p}-${k}`,
-        "aria-hidden": m === k
+      B.map(d, (i, R) => typeof i == "undefined" ? i : W(i, {
+        uid: v,
+        index: R,
+        active: m === R,
+        effect: e === "fade" ? "fade" : "none",
+        speed: c
       }))
     ),
-    F && /* @__PURE__ */ l.createElement(
-      F,
+    K && /* @__PURE__ */ l.createElement(
+      K,
       {
-        uid: p,
+        uid: v,
         activeIndex: m,
         itemCount: o,
-        animation: L,
-        duration: e,
-        next: d,
-        prev: E,
-        goTo: _
+        animation: U,
+        duration: a,
+        next: _,
+        prev: N,
+        goTo: f
       }
     )
   );
-}), fe = W(_e);
-fe.Item = te;
+}), ke = X(fe);
+ke.Item = re;
 export {
-  fe as default,
-  B as useAccessibility
+  ke as default,
+  L as useAccessibility
 };

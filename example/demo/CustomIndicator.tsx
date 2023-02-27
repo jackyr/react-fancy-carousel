@@ -25,7 +25,8 @@ const CustomIndicator: React.FC<IndicatorPropsType> = ({
           aria-controls={`carousel-item-${uid}-${i}`}
           aria-selected={activeIndex === i}
           tabIndex={activeIndex === i ? 0 : -1}
-          className={`${styles.indicator_item} ${activeIndex === i ? styles.active : ''}`}
+          data-active={activeIndex === i}
+          className={styles.indicator_item}
           onClick={() => goTo(i)}
           onKeyDown={handleKeyDown}
         >{i + 1}</li>
