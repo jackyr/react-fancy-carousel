@@ -1,8 +1,8 @@
 import { useRef, useCallback } from 'react';
 
 export const classNames = (...args: Array<string | {[key: string]: boolean} | undefined>) => {
-  return args.reduce<string[]>((p, c) => p.concat(
-    typeof c === 'string' ? c : Object.keys(c || {}).map(v => (c || {})[v] ? v : ''),
+  return args.reduce<(string | undefined)[]>((p, c) => p.concat(
+    typeof c === 'string' ? c : c && Object.keys(c).map(v => c[v] ? v : ''),
   ), []).filter(Boolean).join(' ');
 };
 

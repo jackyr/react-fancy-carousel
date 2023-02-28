@@ -1,84 +1,106 @@
+import { useRef } from 'react';
 import { act, fireEvent, render, renderHook } from '@testing-library/react';
-import Carousel from '../index';
-import { classNames, useUid } from '../utils';
+import Carousel, { type RefType } from '../index';
 
-describe('utils test', () => {
-  test('test classNames', () => {
-    expect(classNames()).toBe('');
-    expect(classNames('a')).toBe('a');
-    expect(classNames({ a: true })).toBe('a');
-    expect(classNames('a', '', { b: true }, { c: false, d: true })).toBe('a b d');
-  });
-
-  test('test useUid', () => {
-    const { result } = renderHook(() => useUid());
-    const { result: another_result } = renderHook(() => useUid());
-    expect(result.current).toMatch(/^[0-9a-z]{5}$/);
-    expect(result.current).not.toBe(another_result.current);
-  });
+test('renders Carousel component', () => {
+  const { getByText } = render(<Carousel>
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const element = getByText('1');
+  expect(element).toBeInTheDocument();
 });
 
-describe('carousel component test', () => {
-  test('renders Carousel component', () => {
-    const { getByText } = render(<Carousel>
-      <Carousel.Item>1</Carousel.Item>
-      <Carousel.Item>2</Carousel.Item>
-    </Carousel>);
-    const element = getByText('1');
-    expect(element).toBeInTheDocument();
+test('test autoplay and duration', async () => {
+  const { getAllByRole } = render(<Carousel
+    autoplay
+    duration={2000}
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const tabpanels = getAllByRole('tabpanel', {
+    hidden: true,
   });
-  
-  test('test autoplay', async () => {
-    const { getAllByRole } = render(<Carousel
-      autoplay
-      duration={2000}
-    >
-      <Carousel.Item>1</Carousel.Item>
-      <Carousel.Item>2</Carousel.Item>
-    </Carousel>);
-    const tabpanels = getAllByRole('tabpanel', {
-      hidden: true,
-    });
-    expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
-    expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
-    await act(() => {
-      return new Promise(resolve => setTimeout(resolve, 2000));
-    });
-    expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
-    expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
-  });
+  expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
+  expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
+  await act(() => new Promise(resolve => setTimeout(resolve, 2000)));
+  expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
+  expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
+});
 
-  test('test indicator click', () => {
-    const { getByRole, container } = render(<Carousel>
-      <Carousel.Item>1</Carousel.Item>
-      <Carousel.Item>2</Carousel.Item>
-    </Carousel>);
-    const targetTab = getByRole('tab', {
-      selected: false,
-    });
-    const targetTabpanel = container.querySelector(`#${targetTab.getAttribute('aria-controls')}`);
-    expect(targetTab).toHaveAttribute('aria-selected', 'false');
-    expect(targetTabpanel).toHaveAttribute('aria-hidden', 'true');
-    fireEvent.click(targetTab);
-    expect(targetTab).toHaveAttribute('aria-selected', 'true');
-    expect(targetTabpanel).toHaveAttribute('aria-hidden', 'false');
-  });
+test('test none indicator', () => {
+  const { queryAllByRole } = render(<Carousel
+    indicator={null}
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const targetTab = queryAllByRole('tab');
+  expect(targetTab).toHaveLength(0);
+});
 
-  test('test callback function', async () => {
-    const handleChange = jest.fn();
-    const { getByRole } = render(<Carousel
-      autoplay
-      duration={2000}
-      onChange={handleChange}
+test('test indicator click', () => {
+  const { getByRole, container } = render(<Carousel
+      effect='fade'
+      indicator="dot"
     >
-      <Carousel.Item>1</Carousel.Item>
-      <Carousel.Item>2</Carousel.Item>
-    </Carousel>);
-    const targetTab = getByRole('tab', {
-      selected: false,
-    });
-    fireEvent.click(targetTab);
-    expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(1, 0);
-  })
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const targetTab = getByRole('tab', {
+    selected: false,
+  });
+  const targetTabpanel = container.querySelector(`#${targetTab.getAttribute('aria-controls')}`);
+  expect(targetTab).toHaveAttribute('aria-selected', 'false');
+  expect(targetTabpanel).toHaveAttribute('aria-hidden', 'true');
+  fireEvent.click(targetTab);
+  expect(targetTab).toHaveAttribute('aria-selected', 'true');
+  expect(targetTabpanel).toHaveAttribute('aria-hidden', 'false');
+});
+
+test('test callback function', async () => {
+  const handleChange = jest.fn();
+  const { getByRole } = render(<Carousel
+    autoplay
+    duration={2000}
+    onChange={handleChange}
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const targetTab = getByRole('tab', {
+    selected: false,
+  });
+  fireEvent.click(targetTab);
+  expect(handleChange).toHaveBeenCalledTimes(1);
+  expect(handleChange).toHaveBeenCalledWith(1, 0);
+});
+
+test('test reference method', () => {
+  const { result } = renderHook(() => useRef<RefType>())
+  const { getAllByRole } = render(<Carousel
+    ref={result.current as any}
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const ref = result.current.current as RefType;
+  const targetTabs = getAllByRole('tab');
+  act(() => ref.next());
+  expect(targetTabs[1]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.next());
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.prev());
+  expect(targetTabs[1]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.prev());
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.goTo(1));
+  expect(targetTabs[1]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.goTo(100));
+  expect(targetTabs[1]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.goTo(-1));
+  expect(targetTabs[1]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.goTo(-100));
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
 });

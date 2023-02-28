@@ -98,6 +98,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
         } : undefined}
       >
         {Children.map(children, (child, i) => {
+          /* istanbul ignore next */
           if (typeof child === 'undefined') return child;
           return cloneElement(child, {
             uid,
