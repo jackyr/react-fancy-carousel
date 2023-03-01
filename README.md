@@ -1,4 +1,10 @@
-# react-fancy-carousel [![npm](https://img.shields.io/npm/v/react-fancy-carousel.svg?style=flat-square)](https://www.npmjs.com/package/react-fancy-carousel)
+# react-fancy-carousel
+![NPM](https://img.shields.io/npm/l/react-fancy-carousel)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-fancy-carousel)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jackyr/react-fancy-carousel/pages.yml)
+[![Coveralls](https://img.shields.io/coverallsCoverage/github/jackyr/react-fancy-carousel)](https://coveralls.io/github/jackyr/react-fancy-carousel?branch=main)
+[![npm](https://img.shields.io/npm/v/react-fancy-carousel)](https://www.npmjs.com/package/react-fancy-carousel)
+
 - Built-in common different carousel effects and indicators.
 - Support extension and customization.
 - Use with react component or hooks(todo..).
