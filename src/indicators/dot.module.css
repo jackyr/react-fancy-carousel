@@ -3,21 +3,21 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: var(--indicator-items-gap);
   position: absolute;
-  bottom: 30px;
+  bottom: var(--indicator-surround-offset);
 }
 
 .indicator_item {
-  width: 10px;
-  height: 10px;
+  width: var(--indicator-dot-diameter);
+  height: var(--indicator-dot-diameter);
   border-radius: 50%;
-  background-color: #777;
+  background-color: var(--indicator-bg-color);
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
 .indicator_item[data-active=true] {
-  background-color: #ddd;
+  background-color: var(--indicator-active-bg-color);
 }

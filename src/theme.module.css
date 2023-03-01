@@ -1,0 +1,13 @@
+.default {
+  --indicator-bg-color: rgba(0, 0, 0, 0.4);
+  --indicator-active-bg-color: #fff;
+
+  --indicator-items-gap: 10px;
+  --indicator-surround-offset: 30px;
+
+  --indicator-dot-diameter: 10px;
+  
+  --indicator-solid-width: 40px;
+  --indicator-solid-height: 3px;
+  --indicator-solid-border-radius: 2px;
+}

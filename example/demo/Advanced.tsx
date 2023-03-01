@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react'
 import ReactFancyCarousel, { type RefType } from 'react-fancy-carousel'
+import customTheme from './customTheme.module.css'
 
 const Item = ReactFancyCarousel.Item
 
@@ -17,9 +18,10 @@ function Advanced() {
   }, [])
 
   return (<>
-    <h2>Advanced use - Ref instance method</h2>
+    <h2>Advanced use - Ref instance method, custom theme</h2>
     <ReactFancyCarousel
       ref={carouselRef}
+      className={customTheme.custom}
       style={{ height: '500px' }}
       effect="fade"
       indicator="dot"

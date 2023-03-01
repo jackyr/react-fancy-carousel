@@ -53,61 +53,34 @@ export default () => {
 ``` -->
 
 ## Options
-#### `autoplay`: boolean
-Autoplay. default: false
-
-#### `effect`: 'slide' | 'fade'
-Change animation effect. default: 'slide'
-
-#### `duration`: number
-Autoplay time duration. default: 3000 (ms)
-
-#### `speed`: number
-Transition speed. default: 500 (ms)
-
-#### `timingFunction`: string
-Transition timing function, reference to css property 'transition-timing-function'. default: 'ease'
-
-#### `indicator`: 'solid' | 'dot' | React.ComponentType | null
-Use built-in indicator or customized component, wil be hidden when set to null. default: 'solid'
-
-#### `onChange`: (currIndex: number, prevIndex: number) => void
-Active item change handler. default: () => {}
+| Name | Type | Description | Default |
+| :----- | :----- | :----- | :----- |
+| `autoplay` | boolean | Autoplay. | false |
+| `effect` | 'slide' \| 'fade' | Change animation effect. | 'slide' |
+| `duration` | number | Autoplay time duration. | 3000 (ms) |
+| `speed` | number | Transition speed. | 500 (ms) |
+| `timingFunction` | string | Transition timing function, reference to css property 'transition-timing-function' | 'ease' |
+| `indicator` | 'solid' \| 'dot' \| React.ComponentType \| null | Use built-in indicator or customized component, it will be hidden when set to null. | 'solid' |
+| `onChange` |  (currIndex: number, prevIndex: number) => void | Active item change handler. | () => {} |
 
 ## Ref instance methods (interface RefType)
-#### `next`: () => void
-Change to next item. default: () => {}
-
-#### `prev`: () => void
-Change to prev item. default: () => {}
-
-#### `goTo`: (index: number) => void
-Change to item given by index. default: () => {}
+| Name | Type | Description |
+| :----- | :----- | :----- |
+| `next` | () => void | Change to next item. |
+| `prev` | () => void | Change to prev item. |
+| `goTo` | (index: number) => void | Change to item given by index. |
 
 ## Customized indicator component options (interface IndicatorPropsType)
-#### `uid`: string
-Carousel instance uid, used for ARIA
-
-#### `itemCount`: number
-Carousel item total count
-
-#### `activeIndex`: number
-Current active index
-
-#### `animation`: number
-Show animation
-
-#### `duration`: number
-Animation duration
-
-#### `next`: () => void
-Change to next item
-
-#### `prev`: () => void
-Change to prev item
-
-#### `goTo`: (index: number) => void
-Change to item given by index
+| Name | Type | Description |
+| :----- | :----- | :----- |
+| `uid` | string | Carousel instance uid, used for ARIA. |
+| `itemCount` | number | Carousel item total count. |
+| `activeIndex` | number | Current active index. |
+| `animation` | number | Show animation. |
+| `duration` | number | Animation duration. |
+| `next` | () => void | Change to next item. |
+| `prev` | () => void | Change to prev item. |
+| `goTo` | (index: number) => void | Change to item given by index. |
 
 ## Test
 ```sh

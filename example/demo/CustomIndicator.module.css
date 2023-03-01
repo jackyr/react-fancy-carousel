@@ -14,7 +14,7 @@
   border-radius: 2px;
   font-size: 14px;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -25,7 +25,7 @@
 
 .indicator_item[data-active=true] {
   color: #000;
-  background-color: #ddd;
+  background-color: #fff;
 }
 
 .nextBtn, .prevBtn {
@@ -37,7 +37,7 @@
   height: 50px;
   border-radius: 2px;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   border: none;
   transform: translate(0, -50%);
   cursor: pointer;

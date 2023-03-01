@@ -1,6 +1,6 @@
 {
   "name": "react-fancy-carousel",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-beta.2",
   "description": "An accessible and customizable react carousel component. Easy to use.",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -24,7 +24,7 @@
     "site": "tsc && vite build",
     "preview": "vite preview",
     "build": "tsc && vite build --config vite.config.build.ts",
-    "prepublish": "npm run test && npm run build",
+    "prepublishOnly": "npm run test && npm run build",
     "test": "jest --collectCoverage",
     "test:ci": "jest --coverage && coveralls < coverage/lcov.info",
     "lint": "eslint src"

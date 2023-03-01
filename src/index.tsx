@@ -4,6 +4,7 @@ import { useUid, classNames } from './utils';
 import Item from './Item';
 import SolidIndicator from './indicators/solid';
 import DotIndicator from './indicators/dot';
+import theme from './theme.module.css';
 import styles from './index.module.css';
 
 const Carousel = forwardRef<RefType, CarouselPropsType>(({
@@ -87,7 +88,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   return (
     <div
       {...restProps}
-      className={classNames(className, styles.carousel)}
+      className={classNames(className, theme.default, styles.carousel)}
     >
       <div
         className={classNames(styles.container, {[styles.slide]: effect === 'slide'})}

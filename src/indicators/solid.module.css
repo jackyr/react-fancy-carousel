@@ -3,16 +3,16 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: var(--indicator-items-gap);
   position: absolute;
-  bottom: 30px;
+  bottom: var(--indicator-surround-offset);
 }
 
 .indicator_item {
-  width: 40px;
-  height: 3px;
-  border-radius: 2px;
-  background-color: #777;
+  width: var(--indicator-solid-width);
+  height: var(--indicator-solid-height);
+  border-radius: var(--indicator-solid-border-radius);
+  background-color: var(--indicator-bg-color);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -24,7 +24,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-color: #ddd;
+  background-color: var(--indicator-active-bg-color);
   will-change: indicatorAnim;
 }
 
