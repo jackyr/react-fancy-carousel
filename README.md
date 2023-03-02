@@ -82,6 +82,23 @@ export default () => {
 | `prev` | () => void | Change to prev item. |
 | `goTo` | (index: number) => void | Change to item given by index. |
 
+## Theme css vars
+```css
+.default {
+  --indicator-bg-color: rgba(0, 0, 0, 0.4);
+  --indicator-active-bg-color: #fff;
+
+  --indicator-items-gap: 10px;
+  --indicator-surround-offset: 30px;
+
+  --indicator-dot-diameter: 10px;
+
+  --indicator-solid-width: 40px;
+  --indicator-solid-height: 3px;
+  --indicator-solid-border-radius: 2px;
+}
+```
+
 ## Test
 ```sh
 git clone git@github.com:jackyr/react-fancy-carousel.git
