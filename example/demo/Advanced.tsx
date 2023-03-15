@@ -16,10 +16,13 @@ export default function () {
   // Use keyboard arrow key to control
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      e.stopPropagation()
-      if (e.key === 'ArrowLeft') carouselRef.current?.prev()
-      if (e.key === 'ArrowRight') carouselRef.current?.next()
-    };
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        e.stopPropagation()
+        if (e.key === 'ArrowLeft') carouselRef.current?.prev()
+        else carouselRef.current?.next()
+      }
+    }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [])
@@ -52,10 +55,13 @@ function Advanced() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      e.stopPropagation()
-      if (e.key === 'ArrowLeft') carouselRef.current?.prev()
-      if (e.key === 'ArrowRight') carouselRef.current?.next()
-    };
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        e.stopPropagation()
+        if (e.key === 'ArrowLeft') carouselRef.current?.prev()
+        else carouselRef.current?.next()
+      }
+    }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [])

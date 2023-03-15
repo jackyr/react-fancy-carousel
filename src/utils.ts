@@ -10,14 +10,12 @@ export const useUid = () => useRef(Math.random().toString(36).substring(2, 7)).c
 
 export const useAccessibility = () => {
   return useCallback((e: React.KeyboardEvent<HTMLElement>) => {
+    e.preventDefault();
     e.stopPropagation();
     const parentNode = e.currentTarget.parentNode as HTMLElement;
     const childNodeArr = Array.from(parentNode.childNodes) as HTMLElement[];
     const currentFocusIndex = childNodeArr.findIndex(v => v === e.currentTarget);
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      e.currentTarget.click();
-    }
+    if (e.key === 'Enter' || e.key === ' ') e.currentTarget.click();
     if (e.key === 'ArrowRight') {
       if (currentFocusIndex === childNodeArr.length - 1) childNodeArr[0].focus();
       else childNodeArr[currentFocusIndex + 1].focus();
