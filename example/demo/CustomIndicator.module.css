@@ -28,7 +28,7 @@
   background-color: #fff;
 }
 
-.nextBtn, .prevBtn {
+.prevBtn, .nextBtn {
   position: absolute;
   left: 20px;
   top: 50%;
@@ -43,7 +43,12 @@
   cursor: pointer;
 }
 
-.prevBtn {
+.prevBtn:disabled, .nextBtn:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: default;
+}
+
+.nextBtn {
   left: auto;
   right: 20px;
 }

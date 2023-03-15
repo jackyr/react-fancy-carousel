@@ -14,6 +14,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   duration = 3000,
   speed = 500,
   timingFunction = 'ease',
+  infiniteLoop = true,
   indicator = 'solid',
   children,
   onChange,
@@ -40,13 +41,23 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
 
   // change operation method
   const next = useCallback(() =>
-    setCurrentIndex(index => index === itemCount - 1 ? 0 : index + 1), [itemCount]);
+    setCurrentIndex(index => {
+      if (index === itemCount - 1) {
+        return infiniteLoop ? 0 : index;
+      }
+      return index + 1;
+    }), [infiniteLoop, itemCount]);
   const prev = useCallback(() =>
-    setCurrentIndex(index => index === 0 ? itemCount - 1 : index - 1), [itemCount]);
+    setCurrentIndex(index => {
+      if (index === 0) {
+        return infiniteLoop ? itemCount - 1 : index;
+      }
+      return index - 1;
+    }), [infiniteLoop, itemCount]);
   const goTo = useCallback((index: number) =>
     setCurrentIndex(() => {
       if (index < 0) return -index > itemCount ? 0 : itemCount + index;
-      else return index > itemCount - 1 ? itemCount - 1 : index;
+      return index > itemCount - 1 ? itemCount - 1 : index;
     }), [itemCount]);
 
   // trigger onChange callback when currentIndex change
@@ -60,10 +71,13 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   // trigger autoplay
   useEffect(() => {
     if (autoplay && itemCount > 1) {
-      autoPlayTimer.current = window.setTimeout(next, duration);
+      if (!infiniteLoop && currentIndex === itemCount - 1) {
+        window.clearTimeout(autoPlayTimer.current);
+      }
+      else autoPlayTimer.current = window.setTimeout(next, duration);
     }
     return () => window.clearTimeout(autoPlayTimer.current);
-  }, [autoplay, currentIndex, duration, itemCount, next]);
+  }, [autoplay, currentIndex, duration, infiniteLoop, itemCount, next]);
 
   // reset indicator animation when options changes
   useEffect(() => {

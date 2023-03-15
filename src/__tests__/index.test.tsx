@@ -104,3 +104,27 @@ test('test reference method', () => {
   act(() => ref.goTo(-100));
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
 });
+
+test('test finite loop', async () => {
+  const { result } = renderHook(() => useRef<RefType>())
+  const { getAllByRole } = render(<Carousel
+    ref={result.current as any}
+    autoplay
+    duration={1000}
+    infiniteLoop={false}
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>)
+  const ref = result.current.current as RefType;
+  const targetTabs = getAllByRole('tab');
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
+  act(() => ref.prev());
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
+  await act(() => new Promise(resolve => setTimeout(resolve, 1000)));
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
+  await act(() => new Promise(resolve => setTimeout(resolve, 1000)));
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
+  act(() => ref.next());
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
+});

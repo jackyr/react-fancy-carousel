@@ -13,7 +13,7 @@ export default function () {
   return (
     <ReactFancyCarousel
       style={{ height: '500px' }}
-      autoplay
+      infiniteLoop={false}
       indicator={CustomIndicator}
     >
       <Item style={{ backgroundColor: '#eee' }}>1</Item>
@@ -63,21 +63,25 @@ const CustomIndicator: React.FC<IndicatorPropsType> = ({
     </ul>
     <button
       type="button"
-      className={styles.nextBtn}
-      aria-label="change to next"
-      aria-controls={
-        \`carousel-item-\${uid}-\${activeIndex === itemCount - 1 ? 0 : activeIndex + 1}\`
-      }
+      className={styles.prevBtn}
+      aria-label="change to previous"
+      aria-controls={\`carousel-item-\${uid}-\${
+        activeIndex === 0 ? 0 : activeIndex - 1
+      }\`}
+      aria-disabled={activeIndex === 0}
+      disabled={activeIndex === 0}
       tabIndex={0}
       onClick={prev}
     >&lt;</button>
     <button
       type="button"
-      className={styles.prevBtn}
-      aria-label="change to previous"
-      aria-controls={
-        \`carousel-item-\${uid}-\${activeIndex === 0 ? itemCount - 1 : activeIndex - 1}\`
-      }
+      className={styles.nextBtn}
+      aria-label="change to next"
+      aria-controls={\`carousel-item-\${uid}-\${
+        activeIndex === itemCount - 1 ? itemCount - 1 : activeIndex + 1
+      }\`}
+      aria-disabled={activeIndex === itemCount - 1}
+      disabled={activeIndex === itemCount - 1}
       tabIndex={0}
       onClick={next}
     >&gt;</button>
@@ -118,7 +122,7 @@ const codeStr3 = `
   background-color: #fff;
 }
 
-.nextBtn, .prevBtn {
+.prevBtn, .nextBtn {
   position: absolute;
   left: 20px;
   top: 50%;
@@ -133,7 +137,12 @@ const codeStr3 = `
   cursor: pointer;
 }
 
-.prevBtn {
+.prevBtn:disabled, .nextBtn:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: default;
+}
+
+.nextBtn {
   left: auto;
   right: 20px;
 }
@@ -147,7 +156,7 @@ function Custom() {
     <div style={{ display: 'flex', gap: 20 }}>
       <ReactFancyCarousel
         style={{ height: '500px', flex: '1 0 500px' }}
-        autoplay
+        infiniteLoop={false}
         indicator={CustomIndicator}
       >
         <Item style={{ backgroundColor: '#eee' }}>1</Item>

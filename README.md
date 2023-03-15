@@ -60,6 +60,7 @@ export default () => {
 | `duration` | number | Autoplay time duration. | 3000 (ms) |
 | `speed` | number | Transition speed. | 500 (ms) |
 | `timingFunction` | string | Transition timing function, reference to css property 'transition-timing-function' | 'ease' |
+| `infiniteLoop` | boolean | Infinite loop. | true |
 | `indicator` | 'solid' \| 'dot' \| React.ComponentType \| null | Use built-in indicator or customized component, it will be hidden when set to null. | 'solid' |
 | `onChange` |  (currIndex: number, prevIndex: number) => void | Active item change handler. | () => {} |
 
