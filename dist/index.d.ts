@@ -32,6 +32,11 @@ declare interface CarouselPropsType extends Omit<JSX.IntrinsicElements['div'], '
      */
     timingFunction?: string;
     /**
+     * @description infinite loop
+     * @default true
+     */
+    infiniteLoop?: boolean;
+    /**
      * @description use built-in indicator or customized component, wil be hidden when set to null
      * @enum 'solid' | 'dot' | React.ComponentType | null
      * @default 'solid'
