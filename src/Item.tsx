@@ -8,6 +8,7 @@ const Item: React.FC<ItemPropsType> = ({
   className,
   uid,
   index,
+  order,
   active,
   effect,
   speed,
@@ -17,7 +18,7 @@ const Item: React.FC<ItemPropsType> = ({
   return (
     <section
       {...restProps}
-      style={Object.assign({ transitionDuration: `${speed}ms` }, style)}
+      style={Object.assign({ order }, { transitionDuration: `${speed}ms` }, style)}
       className={classNames(className, styles.carousel_item, {[styles.fade]: effect === 'fade'})}
       id={`carousel-item-${uid}-${index}`}
       role="tabpanel"

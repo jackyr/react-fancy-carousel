@@ -6,6 +6,15 @@ export const classNames = (...args: Array<string | {[key: string]: boolean} | un
   ), []).filter(Boolean).join(' ');
 };
 
+export const reOrder = (targetIndex: number, length: number) => {
+  const middle = Math.ceil(length / 2);
+  return Array.from({ length }).map((_, i) => {
+    const diff = middle - (targetIndex + 1);
+    const order = (diff < 0 ? diff + length : diff) + i + 1;
+    return order > length ? order - length : order;
+  });
+};
+
 export const useUid = () => useRef(Math.random().toString(36).substring(2, 7)).current;
 
 export const useAccessibility = () => {

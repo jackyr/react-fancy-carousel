@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle } from 'react';
 import type { CarouselPropsType, RefType } from './types.d';
-import { useUid, classNames } from './utils';
+import { useUid, classNames, reOrder } from './utils';
 import Item from './Item';
 import SolidIndicator from './indicators/solid';
 import DotIndicator from './indicators/dot';
@@ -15,6 +15,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   speed = 500,
   timingFunction = 'ease',
   infiniteLoop = true,
+  continuousLoop = false,
   indicator = 'solid',
   children,
   onChange,
@@ -30,8 +31,14 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   const itemCount = useMemo(() => Children.count(children), [children]);
   // previous children count
   const prevItemCount = useRef<number>(itemCount);
+  // children item order array, start from 1
+  const [itemOrders, setItemOrders] = useState(() => Array.from({ length: itemCount }).fill(0));
   // autoplay timer handler
   const autoPlayTimer = useRef<number>();
+  // 
+  const reOrderTimer = useRef<number>();
+  //
+  const [animating, setAnimating] = useState(false);
   // show indicator animation
   const [indicatorAnim, setIndicatorAnim] = useState(autoplay && itemCount > 1);
   // indicator component
@@ -44,16 +51,12 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   // change operation method
   const next = useCallback(() =>
     setCurrentIndex(index => {
-      if (index === itemCount - 1) {
-        return infiniteLoop ? 0 : index;
-      }
+      if (index === itemCount - 1) return infiniteLoop ? 0 : index;
       return index + 1;
     }), [infiniteLoop, itemCount]);
   const prev = useCallback(() =>
     setCurrentIndex(index => {
-      if (index === 0) {
-        return infiniteLoop ? itemCount - 1 : index;
-      }
+      if (index === 0) return infiniteLoop ? itemCount - 1 : index;
       return index - 1;
     }), [infiniteLoop, itemCount]);
   const goTo = useCallback((index: number) =>
@@ -61,6 +64,24 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
       if (index < 0) return -index > itemCount ? 0 : itemCount + index;
       return index > itemCount - 1 ? itemCount - 1 : index;
     }), [itemCount]);
+
+  // adjust item orders and trigger animation when currentIndex change
+  useEffect(() => {
+    if (continuousLoop) {
+      if (currentIndex !== prevIndex.current) {
+        setAnimating(false)
+        window.clearTimeout(reOrderTimer.current)
+        reOrderTimer.current = window.setTimeout(function () {
+          setItemOrders(reOrder(currentIndex, itemCount));
+          setAnimating(false)
+        }, speed);
+      } else {
+        setItemOrders(reOrder(currentIndex, itemCount));
+      }
+    } else {
+      setItemOrders(Array.from({ length: itemCount }).map((_, i) => i + 1));
+    }
+  }, [continuousLoop, currentIndex, itemCount, speed]);
 
   // trigger onChange callback when currentIndex change
   useEffect(() => {
@@ -112,7 +133,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
       <div
         className={classNames(styles.container, {[styles.slide]: effect === 'slide'})}
         style={effect === 'slide' ? {
-          transform: `translate(${-currentIndex * 100 + '%'}, 0)`,
+          transform: continuousLoop ? `translate(-200%, 0)` : `translate(${-currentIndex * 100 + '%'}, 0)`,
           transitionDuration: `${speed}ms`,
           transitionTimingFunction: timingFunction,
         } : undefined}
@@ -123,6 +144,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
           return cloneElement(child, {
             uid,
             index: i,
+            order: itemOrders[i],
             active: currentIndex === i,
             effect: effect === 'fade' ? 'fade' : 'none',
             speed,
