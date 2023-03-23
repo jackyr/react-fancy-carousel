@@ -27,7 +27,9 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   // previous visible item index
   const prevIndex = useRef<number>(0);
   // childrenCount
-  const itemCount = useMemo(() => Children.count(children), [children])
+  const itemCount = useMemo(() => Children.count(children), [children]);
+  // previous children count
+  const prevItemCount = useRef<number>(itemCount);
   // autoplay timer handler
   const autoPlayTimer = useRef<number>();
   // show indicator animation
@@ -89,7 +91,10 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
 
   // reset current index when children changes
   useEffect(() => {
-    goTo(0);
+    if (itemCount !== prevItemCount.current) {
+      goTo(0);
+    }
+    prevItemCount.current = itemCount;
   }, [itemCount, goTo]);
 
   // expose methods to reference
