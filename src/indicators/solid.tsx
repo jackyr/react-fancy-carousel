@@ -33,10 +33,12 @@ const Solid: React.FC<IndicatorPropsType> = ({
           onClick={() => goTo(i)}
           onKeyDown={handleKeyDown}
         >
-          <div
-            className={classNames(styles.indicator_item_inner, {[styles.animation]: animation})}
-            style={{ animationDuration: `${duration}ms` }}
-          ></div>
+          <div className={styles.indicator_item_outer}>
+            <div
+              className={classNames(styles.indicator_item_inner, {[styles.animation]: animation})}
+              style={{ animationDuration: `${duration}ms` }}
+            ></div>
+          </div>
         </li>
       ))}
     </ul>

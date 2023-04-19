@@ -9,5 +9,6 @@
   
   --indicator-solid-width: 40px;
   --indicator-solid-height: 3px;
+  --indicator-solid-padding-y: 5px;
   --indicator-solid-border-radius: 2px;
 }

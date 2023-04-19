@@ -1,21 +1,28 @@
 .indicator {
+  list-style: none;
+  margin: 0;
   padding: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   gap: var(--indicator-items-gap);
   position: absolute;
-  bottom: var(--indicator-surround-offset);
+  bottom: calc(var(--indicator-surround-offset) - var(--indicator-solid-padding-y));
 }
 
 .indicator_item {
+  padding-top: var(--indicator-solid-padding-y);
+  padding-bottom: var(--indicator-solid-padding-y);
+  cursor: pointer;
+}
+
+.indicator_item_outer {
   width: var(--indicator-solid-width);
   height: var(--indicator-solid-height);
   border-radius: var(--indicator-solid-border-radius);
   background-color: var(--indicator-bg-color);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .indicator_item_inner {

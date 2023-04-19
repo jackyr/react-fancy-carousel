@@ -7,7 +7,6 @@
 
 - Built-in common different carousel effects and indicators.
 - Support extension and customization.
-- Use with react component or hooks(todo..).
 - ARIA-ify, accessible to people with disabilities.
 - With complete test cases.
 
@@ -35,22 +34,6 @@ export default () => {
   )
 }
 ```
-
-<!-- ### Hooks
-```jsx
-import { useImageCarousel } from 'react-fancy-carousel'
-import 'react-fancy-carousel/style.css'
-
-export default () => {
-  const imageCarousel = useImageCarousel({
-    images: ['1.png', '2.png', '3.png'],
-    autoplay: true,
-  })
-  return (
-    <div>{imageCarousel}</div>
-  )
-}
-``` -->
 
 ## Options
 | Name | Type | Description | Default |
@@ -96,6 +79,7 @@ export default () => {
 
   --indicator-solid-width: 40px;
   --indicator-solid-height: 3px;
+  --indicator-solid-padding-y: 5px;
   --indicator-solid-border-radius: 2px;
 }
 ```
