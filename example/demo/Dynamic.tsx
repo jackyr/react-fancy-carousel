@@ -23,6 +23,7 @@ const childrenArr = [
 
 export default function () {
   const [autoplay, setAutoplay] = useState(true)
+  const [pauseOnHover, setPauseOnHover] = useState(false)
   const [childrenIndex, setChildrenIndex] = useState(0)
   const [speed, setSpeed] = useState(300)
   
@@ -34,12 +35,16 @@ export default function () {
       onClick={() => setAutoplay(autoplay => !autoplay)}
     >change autoplay</button>
     <button
+      onClick={() => setPauseOnHover(pauseOnHover => !pauseOnHover)}
+    >change pauseOnHover</button>
+    <button
       onClick={() => setSpeed(speed => speed === 300 ? 1000 : 300)}
     >change speed</button>
 
     <ReactFancyCarousel
       style={{ height: '500px' }}
       autoplay={autoplay}
+      pauseOnHover={pauseOnHover}
       speed={speed}
     >
       {childrenArr[childrenIndex]}
@@ -51,7 +56,6 @@ export default function () {
 const childrenArr = [
   [
     <Item key={1} style={{ backgroundColor: '#eee' }}>1</Item>,
-    <Item key={2} style={{ backgroundColor: '#bbb' }}>2</Item>,
   ],
   [
     <Item key={3} style={{ backgroundColor: '#999' }}>3</Item>,
@@ -63,6 +67,7 @@ const childrenArr = [
 function Dynamic() {
   useHighlight()
   const [autoplay, setAutoplay] = useState(true)
+  const [pauseOnHover, setPauseOnHover] = useState(false)
   const [childrenIndex, setChildrenIndex] = useState(0)
   const [speed, setSpeed] = useState(300)
 
@@ -71,12 +76,14 @@ function Dynamic() {
       Dynamic change props
       &nbsp;<button onClick={() => setChildrenIndex(index => index === 1 ? 0 : 1)}>change children</button>
       &nbsp;<button onClick={() => setAutoplay(autoplay => !autoplay)}>change autoplay</button>
+      &nbsp;<button onClick={() => setPauseOnHover(pauseOnHover => !pauseOnHover)}>change pauseOnHover</button>
       &nbsp;<button onClick={() => setSpeed(speed => speed === 300 ? 1000 : 300)}>change speed</button>
     </h2>
     <div style={{ display: 'flex', gap: 20 }}>
       <ReactFancyCarousel
         style={{ height: '500px', flex: '1 0 500px' }}
         autoplay={autoplay}
+        pauseOnHover={pauseOnHover}
         speed={speed}
       >
         {childrenArr[childrenIndex]}

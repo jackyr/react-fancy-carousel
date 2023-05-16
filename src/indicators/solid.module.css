@@ -44,6 +44,10 @@
   animation-timing-function: linear;
 }
 
+.indicator_item[data-paused=true] .animation {
+  animation-play-state: paused;
+}
+
 @keyframes indicatorAnim {
   from { width: 0; }
   to { width: 100%; }

@@ -14,7 +14,7 @@ test('renders Carousel component', () => {
 test('test autoplay and duration', async () => {
   const { getAllByRole } = render(<Carousel
     autoplay
-    duration={2000}
+    duration={1000}
   >
     <Carousel.Item>1</Carousel.Item>
     <Carousel.Item>2</Carousel.Item>
@@ -24,9 +24,40 @@ test('test autoplay and duration', async () => {
   });
   expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
   expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
-  await act(() => new Promise(resolve => setTimeout(resolve, 2000)));
+  await act(() => new Promise(resolve => setTimeout(resolve, 1000)));
   expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
   expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
+});
+
+test('test pause on hover', () => {
+  jest.useFakeTimers();
+  const { getAllByRole, getByRole } = render(<Carousel
+    autoplay
+    pauseOnHover
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const tabpanels = getAllByRole('tabpanel', {
+    hidden: true,
+  });
+  const wrapper = getByRole('region');
+  fireEvent.mouseEnter(wrapper);
+  act(() => jest.runAllTimers());
+  expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
+  expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
+  fireEvent.mouseLeave(wrapper);
+  act(() => jest.runAllTimers());
+  expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
+  expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
+  fireEvent.mouseEnter(wrapper);
+  const targetTab = getByRole('tab', {
+    selected: false,
+  });
+  fireEvent.click(targetTab);
+  act(() => jest.runAllTimers());
+  expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
+  expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
 });
 
 test('test none indicator', () => {
@@ -42,9 +73,9 @@ test('test none indicator', () => {
 
 test('test indicator click', () => {
   const { getByRole, container } = render(<Carousel
-      effect='fade'
-      indicator="dot"
-    >
+    effect='fade'
+    indicator="dot"
+  >
     <Carousel.Item>1</Carousel.Item>
     <Carousel.Item>2</Carousel.Item>
   </Carousel>);
@@ -63,7 +94,6 @@ test('test callback function', async () => {
   const handleChange = jest.fn();
   const { getByRole } = render(<Carousel
     autoplay
-    duration={2000}
     onChange={handleChange}
   >
     <Carousel.Item>1</Carousel.Item>
@@ -105,12 +135,12 @@ test('test reference method', () => {
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
 });
 
-test('test finite loop', async () => {
+test('test finite loop', () => {
+  jest.useFakeTimers();
   const { result } = renderHook(() => useRef<RefType>())
   const { getAllByRole } = render(<Carousel
     ref={result.current as any}
     autoplay
-    duration={1000}
     infiniteLoop={false}
   >
     <Carousel.Item>1</Carousel.Item>
@@ -121,9 +151,9 @@ test('test finite loop', async () => {
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
   act(() => ref.prev());
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
-  await act(() => new Promise(resolve => setTimeout(resolve, 1000)));
+  act(() => jest.runAllTimers());
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
-  await act(() => new Promise(resolve => setTimeout(resolve, 1000)));
+  act(() => jest.runAllTimers());
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
   act(() => ref.next());
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');

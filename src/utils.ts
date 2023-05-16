@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useMemo } from 'react';
 
 export const classNames = (...args: Array<string | {[key: string]: boolean} | undefined>) => {
   return args.reduce<(string | undefined)[]>((p, c) => p.concat(
@@ -26,3 +26,43 @@ export const useAccessibility = () => {
     }
   }, []);
 };
+
+export const useTimeout = () => {
+  const handler = useRef<number>();
+  const cbFn = useRef<() => void>();
+  const remaining = useRef(0);
+  const startTimestamp = useRef(0);
+  const pauseTimestamp = useRef(0);
+  const paused = useRef(false);
+  const clear = useCallback(() => {
+    cbFn.current = undefined;
+    remaining.current = 0;
+    startTimestamp.current = 0;
+    pauseTimestamp.current = 0;
+    window.clearTimeout(handler.current);
+    handler.current = undefined;
+  }, []);
+  const set = useCallback((cb: () => void, timeout: number) => {
+    cbFn.current = cb;
+    remaining.current = timeout;
+    startTimestamp.current = Date.now();
+    handler.current = window.setTimeout(cb, timeout);
+  }, []);
+  const pause = useCallback(() => {
+    if (handler.current) {
+      pauseTimestamp.current = Date.now();
+      window.clearTimeout(handler.current);
+      paused.current = true;
+    }
+  }, []);
+  const resume = useCallback(() => {
+    if (cbFn.current && startTimestamp.current && pauseTimestamp.current && remaining.current) {
+      remaining.current = remaining.current - (pauseTimestamp.current - startTimestamp.current);
+      handler.current = window.setTimeout(cbFn.current, remaining.current);
+      startTimestamp.current = Date.now();
+      pauseTimestamp.current = 0;
+      paused.current = false;
+    }
+  }, []);
+  return useMemo(() => ({ set, clear, pause, resume, pausedRef: paused }), [clear, pause, resume, set]);
+}

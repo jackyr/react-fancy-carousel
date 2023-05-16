@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle } from 'react';
 import type { CarouselPropsType, RefType } from './types.d';
-import { useUid, classNames } from './utils';
+import { useUid, classNames, useTimeout } from './utils';
 import Item from './Item';
 import SolidIndicator from './indicators/solid';
 import DotIndicator from './indicators/dot';
@@ -15,6 +15,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   speed = 500,
   timingFunction = 'ease',
   infiniteLoop = true,
+  pauseOnHover = false,
   indicator = 'solid',
   children,
   onChange,
@@ -30,8 +31,10 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   const itemCount = useMemo(() => Children.count(children), [children]);
   // previous children count
   const prevItemCount = useRef<number>(itemCount);
-  // autoplay timer handler
-  const autoPlayTimer = useRef<number>();
+  // autoplay timer
+  const autoPlayTimer = useTimeout();
+  // autoplay pause state
+  const [autoPlayPaused, setAutoPlayPaused] = useState(false);
   // show indicator animation
   const [indicatorAnim, setIndicatorAnim] = useState(autoplay && itemCount > 1);
   // indicator component
@@ -62,6 +65,20 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
       return index > itemCount - 1 ? itemCount - 1 : index;
     }), [itemCount]);
 
+  // autoplay pause control
+  const pauseAutoplay = useCallback(() => {
+    if (autoplay && itemCount > 1 && pauseOnHover) {
+      autoPlayTimer.pause();
+      setAutoPlayPaused(autoPlayTimer.pausedRef.current);
+    }
+  }, [autoplay, itemCount, pauseOnHover, autoPlayTimer]);
+  const continueAutoplay = useCallback(() => {
+    if (autoplay && itemCount > 1 && pauseOnHover) {
+      autoPlayTimer.resume();
+      setAutoPlayPaused(autoPlayTimer.pausedRef.current);
+    }
+  }, [autoplay, itemCount, pauseOnHover, autoPlayTimer]);
+
   // trigger onChange callback when currentIndex change
   useEffect(() => {
     if (onChange && currentIndex !== prevIndex.current) {
@@ -74,12 +91,16 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   useEffect(() => {
     if (autoplay && itemCount > 1) {
       if (!infiniteLoop && currentIndex === itemCount - 1) {
-        window.clearTimeout(autoPlayTimer.current);
+        autoPlayTimer.clear();
+      } else {
+        autoPlayTimer.set(next, duration);
+        if (autoPlayTimer.pausedRef.current) {
+          autoPlayTimer.pause();
+        }
       }
-      else autoPlayTimer.current = window.setTimeout(next, duration);
     }
-    return () => window.clearTimeout(autoPlayTimer.current);
-  }, [autoplay, currentIndex, duration, infiniteLoop, itemCount, next]);
+    return autoPlayTimer.clear;
+  }, [autoplay, currentIndex, duration, infiniteLoop, itemCount, next, autoPlayTimer]);
 
   // reset indicator animation when options changes
   useEffect(() => {
@@ -108,6 +129,16 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
     <div
       {...restProps}
       className={classNames(className, theme.default, styles.carousel)}
+      role="region"
+      aria-label="carousel"
+      onMouseEnter={e => {
+        pauseAutoplay()
+        restProps.onMouseEnter && restProps.onMouseEnter.call(undefined, e)
+      }}
+      onMouseLeave={e => {
+        continueAutoplay()
+        restProps.onMouseLeave && restProps.onMouseLeave.call(undefined, e)
+      }}
     >
       <div
         className={classNames(styles.container, {[styles.slide]: effect === 'slide'})}
@@ -134,6 +165,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
         activeIndex={currentIndex}
         itemCount={itemCount}
         animation={indicatorAnim}
+        paused={autoPlayPaused}
         duration={duration}
         next={next}
         prev={prev}

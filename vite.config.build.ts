@@ -25,6 +25,7 @@ export default defineConfig({
     dts({ 
       rollupTypes: true,
       insertTypesEntry: true,
+      copyDtsFiles: true,
     }),
   ],
 });

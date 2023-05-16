@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames, useAccessibility } from '../utils';
+import { useAccessibility } from '../utils';
 import type { IndicatorPropsType } from '../types.d';
 import styles from './dot.module.css';
 

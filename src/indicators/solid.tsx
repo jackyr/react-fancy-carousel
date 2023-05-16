@@ -8,6 +8,7 @@ const Solid: React.FC<IndicatorPropsType> = ({
   itemCount,
   activeIndex,
   animation,
+  paused,
   duration,
   goTo,
 }) => {
@@ -29,6 +30,7 @@ const Solid: React.FC<IndicatorPropsType> = ({
           aria-selected={activeIndex === i}
           tabIndex={activeIndex === i ? 0 : -1}
           data-active={activeIndex === i}
+          data-paused={paused}
           className={styles.indicator_item}
           onClick={() => goTo(i)}
           onKeyDown={handleKeyDown}

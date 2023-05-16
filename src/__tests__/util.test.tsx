@@ -1,6 +1,6 @@
 import { render, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import { classNames, useAccessibility, useUid } from '../utils';
+import { classNames, useAccessibility, useTimeout, useUid } from '../utils';
 
 test('test classNames', () => {
   expect(classNames()).toBe('');
@@ -50,4 +50,26 @@ test('test useAccessibility', async () => {
   expect(handleFocus).toHaveBeenCalledWith(1);
   await user.keyboard('{ArrowLeft}');
   expect(handleFocus).toHaveBeenCalledWith(0);
+});
+
+test('test useTimeout', () => {
+  jest.useFakeTimers()
+  const { result: { current: timeout } } = renderHook(() => useTimeout());
+  const callbackFn = jest.fn();
+  timeout.set(callbackFn, 1000);
+  expect(callbackFn).not.toBeCalled();
+  jest.runAllTimers();
+  expect(callbackFn).toBeCalledTimes(1);
+  timeout.pause();
+  jest.runAllTimers();
+  expect(callbackFn).toBeCalledTimes(1);
+  timeout.resume();
+  jest.runAllTimers();
+  expect(callbackFn).toBeCalledTimes(2);
+  timeout.set(callbackFn, 1000);
+  timeout.clear();
+  timeout.pause();
+  timeout.resume();
+  jest.runAllTimers();
+  expect(callbackFn).toBeCalledTimes(2);
 });

@@ -44,6 +44,7 @@ export default () => {
 | `speed` | number | Transition speed. | 500 (ms) |
 | `timingFunction` | string | Transition timing function, reference to css property 'transition-timing-function' | 'ease' |
 | `infiniteLoop` | boolean | Infinite loop. | true |
+| `pauseOnHover` | boolean | Pause autoplay on hover | false |
 | `indicator` | 'solid' \| 'dot' \| React.ComponentType \| null | Use built-in indicator or customized component, it will be hidden when set to null. | 'solid' |
 | `onChange` |  (currIndex: number, prevIndex: number) => void | Active item change handler. | () => {} |
 
@@ -62,6 +63,7 @@ export default () => {
 | `activeIndex` | number | Current active index. |
 | `animation` | number | Show animation. |
 | `duration` | number | Animation duration. |
+| `paused` | boolean | Animation paused. |
 | `next` | () => void | Change to next item. |
 | `prev` | () => void | Change to prev item. |
 | `goTo` | (index: number) => void | Change to item given by index. |

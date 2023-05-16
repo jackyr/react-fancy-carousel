@@ -37,6 +37,11 @@ declare interface CarouselPropsType extends Omit<JSX.IntrinsicElements['div'], '
      */
     infiniteLoop?: boolean;
     /**
+     * @description pause autoplay on hover
+     * @default false
+     */
+    pauseOnHover?: boolean;
+    /**
      * @description use built-in indicator or customized component, wil be hidden when set to null
      * @enum 'solid' | 'dot' | React.ComponentType | null
      * @default 'solid'
@@ -73,6 +78,10 @@ export declare interface IndicatorPropsType {
      * @description animation duration
      */
     duration: number;
+    /**
+     * @description animation paused
+     */
+    paused: boolean;
     /**
      * @description change to next item
      * @returns void
