@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.indicator_item:focus-visible {
+  outline: none;
+}
+
 .indicator_item_outer {
   width: var(--indicator-solid-width);
   height: var(--indicator-solid-height);
@@ -23,6 +27,11 @@
   background-color: var(--indicator-bg-color);
   position: relative;
   overflow: hidden;
+}
+
+.indicator_item:focus-visible .indicator_item_outer {
+  outline: auto;
+  outline-color: -webkit-focus-ring-color;
 }
 
 .indicator_item_inner {

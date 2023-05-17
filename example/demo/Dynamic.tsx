@@ -56,6 +56,7 @@ export default function () {
 const childrenArr = [
   [
     <Item key={1} style={{ backgroundColor: '#eee' }}>1</Item>,
+    <Item key={1} style={{ backgroundColor: '#bbb' }}>2</Item>,
   ],
   [
     <Item key={3} style={{ backgroundColor: '#999' }}>3</Item>,
@@ -67,7 +68,7 @@ const childrenArr = [
 function Dynamic() {
   useHighlight()
   const [autoplay, setAutoplay] = useState(true)
-  const [pauseOnHover, setPauseOnHover] = useState(false)
+  const [pauseOnHover, setPauseOnHover] = useState(true)
   const [childrenIndex, setChildrenIndex] = useState(0)
   const [speed, setSpeed] = useState(300)
 
