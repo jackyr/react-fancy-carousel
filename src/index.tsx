@@ -105,7 +105,9 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   // reset indicator animation when options changes
   useEffect(() => {
     if (autoplay && itemCount > 1) {
-      window.requestAnimationFrame(() => setIndicatorAnim(true));
+      window.requestAnimationFrame(() =>
+        window.requestAnimationFrame(() => setIndicatorAnim(true))
+      );
     }
     return () => setIndicatorAnim(false);
   }, [autoplay, duration, itemCount]);
@@ -140,7 +142,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
         restProps.onMouseLeave && restProps.onMouseLeave.call(undefined, e)
       }}
     >
-      <div
+      {children && <div
         className={classNames(styles.container, {[styles.slide]: effect === 'slide'})}
         style={effect === 'slide' ? {
           transform: `translate(${-currentIndex * 100 + '%'}, 0)`,
@@ -149,8 +151,6 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
         } : undefined}
       >
         {Children.map(children, (child, i) => {
-          /* istanbul ignore next */
-          if (typeof child === 'undefined') return child;
           return cloneElement(child, {
             uid,
             index: i,
@@ -159,8 +159,8 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
             speed,
           });
         })}
-      </div>
-      {Indicator && <Indicator
+      </div>}
+      {children && Indicator && <Indicator
         uid={uid}
         activeIndex={currentIndex}
         itemCount={itemCount}

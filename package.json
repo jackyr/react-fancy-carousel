@@ -1,6 +1,6 @@
 {
   "name": "react-fancy-carousel",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0",
   "description": "An accessible and customizable react carousel component. Easy to use.",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,8 @@
     ".": {
       "import": "./dist/ReactFancyCarousel.js",
       "require": "./dist/ReactFancyCarousel.umd.cjs"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
   "files": [
     "dist/",

@@ -31,9 +31,13 @@ test('test autoplay and duration', async () => {
 
 test('test pause on hover', () => {
   jest.useFakeTimers();
+  const mouseEnterCallback = jest.fn();
+  const mouseLeaveCallback = jest.fn();
   const { getAllByRole, getByRole } = render(<Carousel
     autoplay
     pauseOnHover
+    onMouseEnter={mouseEnterCallback}
+    onMouseLeave={mouseLeaveCallback}
   >
     <Carousel.Item>1</Carousel.Item>
     <Carousel.Item>2</Carousel.Item>
@@ -43,10 +47,12 @@ test('test pause on hover', () => {
   });
   const wrapper = getByRole('region');
   fireEvent.mouseEnter(wrapper);
+  expect(mouseEnterCallback).toHaveBeenCalled();
   act(() => jest.runAllTimers());
   expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'false');
   expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'true');
   fireEvent.mouseLeave(wrapper);
+  expect(mouseLeaveCallback).toHaveBeenCalled();
   act(() => jest.runAllTimers());
   expect(tabpanels[0]).toHaveAttribute('aria-hidden', 'true');
   expect(tabpanels[1]).toHaveAttribute('aria-hidden', 'false');
@@ -158,3 +164,38 @@ test('test finite loop', () => {
   act(() => ref.next());
   expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
 });
+
+test('test children change', () => {
+  jest.useFakeTimers();
+  const { getAllByRole, rerender } = render(<Carousel
+    autoplay
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const targetTabs = getAllByRole('tab');
+  act(() => jest.runAllTimers());
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'false');
+  rerender(<Carousel
+    autoplay
+  >
+    <Carousel.Item>3</Carousel.Item>
+  </Carousel>);
+  expect(targetTabs[0]).toHaveAttribute('aria-selected', 'true');
+});
+
+test('test boundary scenario', () => {
+  expect(() => render(<Carousel></Carousel>)).not.toThrow();
+});
+
+test('test boundary scenario2', () => {
+  const { getByRole } = render(<Carousel
+    pauseOnHover
+  >
+    <Carousel.Item>1</Carousel.Item>
+    <Carousel.Item>2</Carousel.Item>
+  </Carousel>);
+  const wrapper = getByRole('region');
+  expect(() => fireEvent.mouseEnter(wrapper)).not.toThrow();
+  expect(() => fireEvent.mouseLeave(wrapper)).not.toThrow();
+})

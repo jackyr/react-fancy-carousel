@@ -154,8 +154,8 @@ function Custom() {
   useHighlight()
 
   return (<section>
-    <h2>Custom use - Custom indicator component</h2>
-    <div style={{ display: 'flex', gap: 20 }}>
+    <h2>Custom indicator component</h2>
+    <div style={{ display: 'flex', gap: 30 }}>
       <ReactFancyCarousel
         style={{ height: '500px', flex: '1 0 500px' }}
         infiniteLoop={false}

@@ -23,23 +23,38 @@ const childrenArr = [
 
 export default function () {
   const [autoplay, setAutoplay] = useState(true)
-  const [pauseOnHover, setPauseOnHover] = useState(false)
+  const [pauseOnHover, setPauseOnHover] = useState(true)
   const [childrenIndex, setChildrenIndex] = useState(0)
   const [speed, setSpeed] = useState(300)
   
   return (<>
+    <label>autoplay:<input 
+      type="checkbox"
+      checked={autoplay}
+      onChange={e => setAutoplay(e.target.checked)}
+    /></label>
+    <label>pauseOnHover:<input
+      type="checkbox"
+      checked={pauseOnHover}
+      onChange={e => setPauseOnHover(e.target.checked)}
+    /></label>
+    <span>speed:
+      <label><input
+        type="radio"
+        value={300}
+        checked={speed === 300}
+        onChange={() => setSpeed(300)}
+      />300</label>
+      <label><input
+        type="radio"
+        value={1000}
+        checked={speed === 1000}
+        onChange={() => setSpeed(1000)}
+      />1000</label>
+    </span>
     <button
       onClick={() => setChildrenIndex(index => index === 1 ? 0 : 1)}
     >change children</button>
-    <button
-      onClick={() => setAutoplay(autoplay => !autoplay)}
-    >change autoplay</button>
-    <button
-      onClick={() => setPauseOnHover(pauseOnHover => !pauseOnHover)}
-    >change pauseOnHover</button>
-    <button
-      onClick={() => setSpeed(speed => speed === 300 ? 1000 : 300)}
-    >change speed</button>
 
     <ReactFancyCarousel
       style={{ height: '500px' }}
@@ -56,7 +71,7 @@ export default function () {
 const childrenArr = [
   [
     <Item key={1} style={{ backgroundColor: '#eee' }}>1</Item>,
-    <Item key={1} style={{ backgroundColor: '#bbb' }}>2</Item>,
+    <Item key={2} style={{ backgroundColor: '#bbb' }}>2</Item>,
   ],
   [
     <Item key={3} style={{ backgroundColor: '#999' }}>3</Item>,
@@ -75,11 +90,16 @@ function Dynamic() {
   return (<section>
     <h2>
       Dynamic change props
-      &nbsp;<button onClick={() => setChildrenIndex(index => index === 1 ? 0 : 1)}>change children</button>
-      &nbsp;<button onClick={() => setAutoplay(autoplay => !autoplay)}>change autoplay</button>
-      &nbsp;<button onClick={() => setPauseOnHover(pauseOnHover => !pauseOnHover)}>change pauseOnHover</button>
-      &nbsp;<button onClick={() => setSpeed(speed => speed === 300 ? 1000 : 300)}>change speed</button>
     </h2>
+    <h5 style={{ display: 'flex', gap: 10 }}>
+      <label>autoplay:<input type="checkbox" checked={autoplay} onChange={e => setAutoplay(e.target.checked)} /></label>
+      <label>pauseOnHover:<input type="checkbox" checked={pauseOnHover} onChange={e => setPauseOnHover(e.target.checked)} /></label>
+      <span>speed:
+        <label><input type="radio" value={300} checked={speed === 300} onChange={() => setSpeed(300)} />300</label>
+        <label><input type="radio" value={1000} checked={speed === 1000} onChange={() => setSpeed(1000)} />1000</label>
+      </span>
+      <button onClick={() => setChildrenIndex(index => index === 1 ? 0 : 1)}>change children</button>
+    </h5>
     <div style={{ display: 'flex', gap: 20 }}>
       <ReactFancyCarousel
         style={{ height: '500px', flex: '1 0 500px' }}

@@ -6,7 +6,8 @@
 [![npm](https://img.shields.io/npm/v/react-fancy-carousel)](https://www.npmjs.com/package/react-fancy-carousel)
 
 - Built-in common different carousel effects and indicators.
-- Support extension and customization.
+- Support theme extension.
+- Support indicator customization.
 - ARIA-ify, accessible to people with disabilities.
 - With complete test cases.
 
@@ -98,6 +99,7 @@ npm test
 Supports Chrome51+ / Edge15+ / Safari10+ / Firefox54+ / etc. ES6 environment.
 
 ## Changelog
+#### v1.0.0
 
 ## License
 MIT
