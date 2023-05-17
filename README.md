@@ -99,7 +99,11 @@ npm test
 Supports Chrome51+ / Edge15+ / Safari10+ / Firefox54+ / etc. ES6 environment.
 
 ## Changelog
+#### v1.0.1
+Valid from v1.0.1.
+
 #### v1.0.0
+Invalid version, unpublished.
 
 ## License
 MIT
