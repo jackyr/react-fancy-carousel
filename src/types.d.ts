@@ -1,5 +1,4 @@
-export interface CarouselPropsType extends Omit<JSX.IntrinsicElements['div'], ''> {
-  children?: React.ReactElement | Array<React.ReactElement>;
+export interface CarouselPropsType {
   /**
    * @description autoplay
    * @default false
@@ -74,7 +73,7 @@ export interface RefType {
   goTo: (index: number) => void;
 }
 
-export interface ItemPropsType extends Omit<JSX.IntrinsicElements['section'], ''> {
+export interface ItemPropsType {
   /**
    * @description carousel instance uid, used for ARIA
    */

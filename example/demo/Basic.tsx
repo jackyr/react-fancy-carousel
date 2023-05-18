@@ -1,11 +1,12 @@
 import ReactFancyCarousel from 'react-fancy-carousel'
 import useHighlight from '../useHighlight'
 
-const Item = ReactFancyCarousel.Item
+const ImgItem = ReactFancyCarousel.ImgItem
 
 const codeStr = `
 import ReactFancyCarousel from 'react-fancy-carousel'
-const Item = ReactFancyCarousel.Item
+import 'react-fancy-carousel/dist/style.css'
+const ImgItem = ReactFancyCarousel.ImgItem
 
 export default function () {
   return (
@@ -13,11 +14,11 @@ export default function () {
       style={{ height: '500px' }}
       autoplay
     >
-      <Item style={{ backgroundColor: '#eee' }}>1</Item>
-      <Item style={{ backgroundColor: '#bbb' }}>2</Item>
-      <Item style={{ backgroundColor: '#999' }}>3</Item>
-      <Item style={{ backgroundColor: '#666' }}>4</Item>
-      <Item style={{ backgroundColor: '#333' }}>5</Item>
+      <ImgItem src='/1.jpeg' width="800" height="400" />
+      <ImgItem src='/2.jpeg' width="800" height="400" />
+      <ImgItem src='/3.jpeg' width="800" height="400" />
+      <ImgItem src='/4.jpeg' width="800" height="400" />
+      <ImgItem src='/5.jpeg' width="800" height="400" />
     </ReactFancyCarousel>
   ) 
 }
@@ -33,11 +34,11 @@ function Basic() {
         style={{ height: '500px', flex: '1 0 500px' }}
         autoplay
       >
-        <Item style={{ backgroundColor: '#eee' }}>1</Item>
-        <Item style={{ backgroundColor: '#bbb' }}>2</Item>
-        <Item style={{ backgroundColor: '#999' }}>3</Item>
-        <Item style={{ backgroundColor: '#666' }}>4</Item>
-        <Item style={{ backgroundColor: '#333' }}>5</Item>
+        <ImgItem src='/1.jpeg' width="800" height="400" />
+        <ImgItem src='/2.jpeg' width="800" height="400" />
+        <ImgItem src='/3.jpeg' width="800" height="400" />
+        <ImgItem src='/4.jpeg' width="800" height="400" />
+        <ImgItem src='/5.jpeg' width="800" height="400" />
       </ReactFancyCarousel>
       <pre style={{ flex: 1, margin: 0 }}>
         Basic.tsx

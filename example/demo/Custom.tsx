@@ -6,6 +6,7 @@ const Item = ReactFancyCarousel.Item
 
 const codeStr = `
 import ReactFancyCarousel from 'react-fancy-carousel'
+import 'react-fancy-carousel/dist/style.css'
 import CustomIndicator from './CustomIndicator.tsx'
 const Item = ReactFancyCarousel.Item
 

@@ -7,6 +7,7 @@ const Item = ReactFancyCarousel.Item
 const codeStr = `
 import { useState } from 'react'
 import ReactFancyCarousel from 'react-fancy-carousel'
+import 'react-fancy-carousel/dist/style.css'
 const Item = ReactFancyCarousel.Item
 
 const childrenArr = [

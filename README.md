@@ -23,14 +23,17 @@ npm install react-fancy-carousel --save
 ```jsx
 import Carousel from 'react-fancy-carousel'
 import 'react-fancy-carousel/dist/style.css'
+
 const Item = Carousel.Item
+const ImgItem = Carousel.ImgItem
 
 export default () => {
   return (
     <Carousel autoplay>
       <Item>{content1}</Item>
       <Item>{content2}</Item>
-      <Item>{content3}</Item>
+      <ImgItem src={imgSrc1} alt="" />
+      <ImgItem src={imgSrc2} alt="" />
     </Carousel>
   )
 }
@@ -99,11 +102,6 @@ npm test
 Supports Chrome51+ / Edge15+ / Safari10+ / Firefox54+ / etc. ES6 environment.
 
 ## Changelog
-#### v1.0.1
-Valid from v1.0.1.
-
-#### v1.0.0
-Invalid version, unpublished.
-
-## License
-MIT
+- v1.1.0 - Add `ImgItem` component / fix style / fix type definition
+- v1.0.1 - Valid from v1.0.1
+- v1.0.0 - Invalid version, unpublished

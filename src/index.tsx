@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, memo, forwardRef, useImperativeHandle } from 'react';
-import type { CarouselPropsType, RefType } from './types.d';
+import React, { useState, useEffect, useMemo, useCallback, useRef, Children, cloneElement, isValidElement, memo, forwardRef, useImperativeHandle } from 'react';
+import type { CarouselPropsType, RefType, ItemPropsType } from './types.d';
 import { useUid, classNames, useTimeout } from './utils';
-import Item from './Item';
+import Item, { type ItemType } from './Item';
+import ImgItem, { type ImgItemType } from './ImgItem';
 import SolidIndicator from './indicators/solid';
 import DotIndicator from './indicators/dot';
 import theme from './theme.module.css';
 import styles from './index.module.css';
 
-const Carousel = forwardRef<RefType, CarouselPropsType>(({
+const Carousel = forwardRef<RefType, CarouselPropsType & Omit<JSX.IntrinsicElements['div'], 'onChange'>>(({
   className,
   autoplay = false,
   effect = 'slide',
@@ -27,8 +28,10 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // previous visible item index
   const prevIndex = useRef<number>(0);
-  // childrenCount
-  const itemCount = useMemo(() => Children.count(children), [children]);
+  // valid children element array
+  const childrenArr = useMemo(() => Children.toArray(children).filter(isValidElement<ItemPropsType>), [children])
+  // children count
+  const itemCount = useMemo(() => childrenArr.length, [childrenArr]);
   // previous children count
   const prevItemCount = useRef<number>(itemCount);
   // autoplay timer
@@ -142,7 +145,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
         restProps.onMouseLeave && restProps.onMouseLeave.call(undefined, e)
       }}
     >
-      {children && <div
+      {itemCount ? <div
         className={classNames(styles.container, {[styles.slide]: effect === 'slide'})}
         style={effect === 'slide' ? {
           transform: `translate(${-currentIndex * 100 + '%'}, 0)`,
@@ -150,7 +153,7 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
           transitionTimingFunction: timingFunction,
         } : undefined}
       >
-        {Children.map(children, (child, i) => {
+        {childrenArr.map((child, i) => {
           return cloneElement(child, {
             uid,
             index: i,
@@ -159,8 +162,8 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
             speed,
           });
         })}
-      </div>}
-      {children && Indicator && <Indicator
+      </div> : children}
+      {!!itemCount && Indicator && <Indicator
         uid={uid}
         activeIndex={currentIndex}
         itemCount={itemCount}
@@ -175,8 +178,11 @@ const Carousel = forwardRef<RefType, CarouselPropsType>(({
   )
 });
 
-const MemoizedCarousel = memo(Carousel) as React.MemoExoticComponent<typeof Carousel> & { Item: typeof Item };
+const MemoizedCarousel = memo(Carousel) as React.MemoExoticComponent<typeof Carousel>
+  & { Item: ItemType }
+  & { ImgItem: ImgItemType };
 MemoizedCarousel.Item = Item;
+MemoizedCarousel.ImgItem = ImgItem;
 
 export default MemoizedCarousel;
 export { useAccessibility } from './utils';

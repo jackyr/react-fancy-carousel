@@ -5,7 +5,7 @@ import Carousel, { type RefType } from '../index';
 test('renders Carousel component', () => {
   const { getByText } = render(<Carousel>
     <Carousel.Item>1</Carousel.Item>
-    <Carousel.Item>2</Carousel.Item>
+    <Carousel.ImgItem />
   </Carousel>);
   const element = getByText('1');
   expect(element).toBeInTheDocument();

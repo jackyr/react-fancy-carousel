@@ -3,7 +3,7 @@ import type { ItemPropsType } from './types';
 import { classNames } from './utils';
 import styles from './index.module.css';
 
-const Item: React.FC<ItemPropsType & JSX.IntrinsicElements['section']> = ({
+const ImgItem: React.FC<ItemPropsType & JSX.IntrinsicElements['img']> = ({
   style,
   className,
   uid,
@@ -11,11 +11,10 @@ const Item: React.FC<ItemPropsType & JSX.IntrinsicElements['section']> = ({
   active,
   effect,
   speed,
-  children,
   ...restProps
 }) => {
   return (
-    <section
+    <img
       {...restProps}
       style={Object.assign({ transitionDuration: `${speed}ms` }, style)}
       className={classNames(className, styles.carousel_item, {[styles.fade]: effect === 'fade'})}
@@ -24,11 +23,9 @@ const Item: React.FC<ItemPropsType & JSX.IntrinsicElements['section']> = ({
       data-active={active}
       aria-labelledby={`carousel-indicator-${uid}-${index}`}
       aria-hidden={!active}
-    >
-      {children}
-    </section>
+    />
   )
 };
 
-export default Item;
-export type ItemType = React.FC<JSX.IntrinsicElements['section']>;
+export default ImgItem;
+export type ImgItemType = React.FC<JSX.IntrinsicElements['img']>;

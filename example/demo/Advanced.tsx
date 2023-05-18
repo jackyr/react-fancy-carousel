@@ -7,6 +7,7 @@ const Item = ReactFancyCarousel.Item
 
 const codeStr = `
 import ReactFancyCarousel, { type RefType } from 'react-fancy-carousel'
+import 'react-fancy-carousel/dist/style.css'
 import customTheme from './customTheme.module.css'
 const Item = ReactFancyCarousel.Item
 
