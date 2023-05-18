@@ -18,11 +18,11 @@ export default function () {
       duration={2000}
       speed={800}
     >
-      <ImgItem src='/1.jpeg' width="800" height="400" />
-      <ImgItem src='/2.jpeg' width="800" height="400" />
-      <ImgItem src='/3.jpeg' width="800" height="400" />
-      <ImgItem src='/4.jpeg' width="800" height="400" />
-      <ImgItem src='/5.jpeg' width="800" height="400" />
+      <ImgItem src='1.jpeg' width="800" height="400" />
+      <ImgItem src='2.jpeg' width="800" height="400" />
+      <ImgItem src='3.jpeg' width="800" height="400" />
+      <ImgItem src='4.jpeg' width="800" height="400" />
+      <ImgItem src='5.jpeg' width="800" height="400" />
     </ReactFancyCarousel>
   ) 
 }
@@ -42,11 +42,11 @@ function Basic2() {
         duration={2000}
         speed={800}
       >
-        <ImgItem src='/1.jpeg' width="800" height="400" />
-        <ImgItem src='/2.jpeg' width="800" height="400" />
-        <ImgItem src='/3.jpeg' width="800" height="400" />
-        <ImgItem src='/4.jpeg' width="800" height="400" />
-        <ImgItem src='/5.jpeg' width="800" height="400" />
+        <ImgItem src='1.jpeg' width="800" height="400" />
+        <ImgItem src='2.jpeg' width="800" height="400" />
+        <ImgItem src='3.jpeg' width="800" height="400" />
+        <ImgItem src='4.jpeg' width="800" height="400" />
+        <ImgItem src='5.jpeg' width="800" height="400" />
       </ReactFancyCarousel>
       <pre style={{ flex: 1, margin: 0 }}>
         Basic2.tsx
